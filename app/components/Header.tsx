@@ -10,7 +10,7 @@ const Header = ({ name }: Page) => {
     <>
       <div className='bg-primary px-[5%] w-full h-[70px] flex justify-between items-center'>
         <Image
-          src='/logo_nobg.png'
+          src='/assets/logo_nobg.png'
           alt='AskAway logo'
           width={100}
           height={100}
@@ -32,18 +32,20 @@ const Header = ({ name }: Page) => {
           <span className='text-primary font-bold px-[10px] py-[2px] rounded-full bg-white'>Andi Montilla</span>
           <div className='flex gap-4'>
             <Image
-              src='/spain.png'
-              alt='es'
-              title='Spanish | Español'
-              width={25}
-              height={25}
-            />
-            <Image
               src='/united-states.png'
               alt='en'
               title='English | Inglés'
               width={25}
               height={25}
+              className='cursor-pointer'
+            />
+            <Image
+              src='/spain.png'
+              alt='es'
+              title='Spanish | Español'
+              width={25}
+              height={25}
+              className='cursor-pointer'
             />
           </div>
         </div>

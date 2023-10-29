@@ -6,7 +6,7 @@ const Footer = () => {
     <>
       <footer className='bg-white w-full p-6 flex items-center justify-center'>
         <Image
-          src='/powered_by.png'
+          src='/assets/powered_by.png'
           alt='AskAway logo'
           width={100}
           height={100}
