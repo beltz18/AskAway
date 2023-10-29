@@ -20,7 +20,8 @@
     "paths": {
       "@c/*": ["./app/components/*"],
       "@t/*": ["./app/types/*"],
-      "@s/*": ["./sass/*"]
+      "@p/*": ["./app/sections/*"],
+      "@s/*": ["./sass/*"],
     },
     "plugins": [
       {

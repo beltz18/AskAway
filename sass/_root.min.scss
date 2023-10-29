@@ -1,5 +1,7 @@
 :root {
-  --white: #ffffff;
+  --white:   #ffffff;
+  --primary: #63C1C5;
+  --active:  #7CD4DA;
 }
 
 * {
@@ -7,3 +9,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.bg-primary   { background-color: var(--primary); }
+.text-primary { color:            var(--primary); }
+.active       { background-color: var(--active);  }

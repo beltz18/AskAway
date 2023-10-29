@@ -1,7 +1,15 @@
+import Header      from "@c/Header"
+import CompanyMain from "@p/CompanyMain"
+import Footer      from "@c/Footer"
+
 export default function Home() {
   return (
     <>
-      <h1>Hello World</h1>
+      <Header name="company" />
+      <CompanyMain>
+        
+      </CompanyMain>
+      <Footer />
     </>
   )
 }
