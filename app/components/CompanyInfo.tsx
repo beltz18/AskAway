@@ -119,7 +119,7 @@ const CompanyInfo = () => {
               />
               <span className='text-gray-400 text-[10px] mt-3'>jpg, png. Max 100mb.</span>
               <span className='text-gray-400 text-[10px]'>Drag and Drop File</span>
-              <span className='bg-[#097AB1] text-white mt-3 px-3 py-[3px] rounded-lg font-bold'>Upload Logo</span>
+              <span className='bg-[#097AB1] text-white text-sm mt-3 px-3 py-[3px] rounded-lg font-bold cursor-pointer'>Upload Logo</span>
             </div>
           </div>
         </div>
@@ -184,6 +184,14 @@ const CompanyInfo = () => {
               className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[36px]'
             />
           </div>
+        </div>
+
+        <div className='pb-6 flex items-center justify-center'>
+          <input
+            type="button"
+            className='bg-[#214F71] text-white font-bold px-4 py-[2px] rounded-md'
+            value='Save Changes'
+          />
         </div>
       </div>
     </>
