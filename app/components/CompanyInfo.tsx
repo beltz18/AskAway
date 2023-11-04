@@ -5,8 +5,8 @@ const CompanyInfo = () => {
   return (
     <>
       <div className='flex flex-col m-auto bg-white shadow-md rounded-md max-w-[1200px]'>
-        <div className='shadow-md flex items-center justify-center py-6 text-[#009EA8] font-bold text-2xl'>
-          <h2>Company Information</h2>
+        <div className='shadow-md flex items-center justify-center py-6'>
+          <h2 className='text-[#009EA8] font-bold text-2xl'>Company Information</h2>
         </div>
         
         <div className='py-12 px-12 flex gap-12'>

@@ -1,15 +1,14 @@
-import React    from 'react'
-import Image    from 'next/image'
-import Link     from 'next/link'
-import Sullivan from '@c/Sullivan'
-import MyHead   from '@c/MyHead'
+import React     from 'react'
+import Image     from 'next/image'
+import Link      from 'next/link'
+import Sullivan  from '@a/components/icons/Sullivan'
+import MyHead    from '@c/MyHead'
+import { links } from '@a/global'
 
 const SignUp = () => {
   return (
     <>
-      <MyHead
-        title="AskAway - Create Account"
-      />
+      <MyHead title="AskAway - Create Account" />
       <div className='w-full h-[100vh] flex'>
         <div className='hidden md:w-[30%] h-full bg-primary relative md:flex md:items-center'>
           <div className='absolute right-[-15%]'>
@@ -71,7 +70,7 @@ const SignUp = () => {
             
             <div className='flex items-center justify-center gap-6 w-full'>
               <Link
-                href='/'
+                href={ links.home.main }
                 className='bg-primary text-white px-3 py-2 rounded-md w-[50%] text-xl text-center'
               >
                 Signup
@@ -83,7 +82,7 @@ const SignUp = () => {
 
           <div className='w-[50%] max-w-[250px] flex items-center justify-center'>
             <Link
-              href='/login'
+              href={ links.login.main }
               className='bg-[#393D41] text-white px-3 py-2 rounded-md text-xl text-center'
             >
               Back to Login

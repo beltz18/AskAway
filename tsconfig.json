@@ -18,6 +18,7 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
+      "@a/*": ["./app/*"],
       "@c/*": ["./app/components/*"],
       "@t/*": ["./app/types/*"],
       "@p/*": ["./app/sections/*"],

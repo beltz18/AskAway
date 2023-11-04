@@ -1,15 +1,14 @@
-import React    from 'react'
-import Image    from 'next/image'
-import Link     from 'next/link'
-import Sullivan from '@c/Sullivan'
-import MyHead   from '@c/MyHead'
+import React     from 'react'
+import Image     from 'next/image'
+import Link      from 'next/link'
+import Sullivan  from '@a/components/icons/Sullivan'
+import MyHead    from '@c/MyHead'
+import { links } from '@a/global'
 
 const Login = () => {
   return (
     <>
-      <MyHead
-        title="AskAway - Login"
-      />
+      <MyHead title="AskAway - Login" />
       <div className='w-full h-[100vh] flex'>
         <div className='hidden md:w-[30%] h-full bg-primary relative md:flex md:items-center'>
           <div className='absolute right-[-15%]'>
@@ -61,7 +60,7 @@ const Login = () => {
             
             <div className='flex gap-6 w-full'>
               <Link
-                href='/'
+                href={ links.home.main }
                 className='bg-primary text-white px-3 py-2 rounded-md w-[50%] text-xl text-center'
               >
                 Login
@@ -78,7 +77,7 @@ const Login = () => {
           <div className='divider border-2 border-b-gray-100 w-[90%] max-w-[500px]'></div>
 
           <div className='w-[50%] max-w-[250px] shadow-2xl rounded-xl'>
-            <Link href='/create-account' className='w-full flex flex-col gap-6 p-6 items-center justify-center'>
+            <Link href={ links.register.main } className='w-full flex flex-col gap-6 p-6 items-center justify-center'>
               <h2 className='text-2xl text-primary text-center'>Create Account</h2>
               <Image
                 src='/assets/new-account.png'
