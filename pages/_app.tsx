@@ -1,6 +1,13 @@
 import '@s/_index.min.scss'
+
+import { Provider }      from 'react-redux'
+import { store }         from '@a/redux/store'
 import type { AppProps } from 'next/app'
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <Provider store={ store }>
+      <Component {...pageProps} />
+    </Provider>
+  )
 }

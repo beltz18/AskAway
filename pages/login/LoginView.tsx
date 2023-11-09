@@ -1,27 +1,47 @@
-import React, { useState }       from 'react'
-import Image                     from 'next/image'
-import Link                      from 'next/link'
-import Sullivan                  from '@i/Sullivan'
-import { links }                 from '@a/global'
-import { loginInfo }             from "@t/common"
-import { PostAPI }               from '@a/functions'
-import { ToastContainer, toast } from 'react-toastify'
-import { setCookie }             from '@a/functions'
+'use client'
 import 'react-toastify/dist/ReactToastify.css'
 
+import React, { useState, useEffect } from 'react'
+import Image                          from 'next/image'
+import Link                           from 'next/link'
+import Sullivan                       from '@i/Sullivan'
+import { links }                      from '@a/global'
+import { loginInfo }                  from "@t/common"
+import { PostAPI }                    from '@a/functions'
+import { ToastContainer, toast }      from 'react-toastify'
+import { setCookie }                  from '@a/functions'
+import { useDispatch }                from 'react-redux'
+import { SaveUserData }               from '@r/slicers/AuthSlicer'
+import { useRouter }                  from 'next/navigation'
+
 const LoginView = () => {
+  // Router
+  const { push } = useRouter()
+  
+  // States
   const [email, setEmail]       : any = useState(null)
   const [passw, setPassw]       : any = useState(null)
   const [disabled, setDisabled] : any = useState(false)
+  const [redirect, setRedirect] : any = useState(false)
 
+  // Redux Stuff
+  const dispatch = useDispatch()
+
+  // Alerts and Regex
   const SuccessAlert     = (message: string) => toast.success(message)
   const ErrorAlert       = (message: string) => toast.error(message)
   const emailRegex : any = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim
 
+  // Data POST
   const dataAuth: loginInfo = {
     email: email,
     password: passw,
   }
+
+  // Redirect
+  useEffect(() => {
+    if (redirect) push('/home')
+  }, [redirect])
 
   return (
     <>
@@ -78,7 +98,10 @@ const LoginView = () => {
                 placeholder='Email'
                 className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-lg px-4 py-2 w-full'
                 onChange={(e) => setEmail(e.target.value)}
-                onBlur={() => email.match(emailRegex) ? setDisabled(false) : setDisabled(true) }
+                onBlur={() => {
+                  if (email)
+                    email.match(emailRegex) ? setDisabled(false) : setDisabled(true)
+                }}
               />
 
               <input
@@ -99,11 +122,10 @@ const LoginView = () => {
                   const res = await PostAPI(dataAuth)
                   if (res?.success) {
                     SuccessAlert('Welcome!')
-                    setCookie('token',     res?.token.split(' ')[1])
-                    setCookie('email',     res?.data?.admin?.email)
-                    setCookie('firstName', res?.data?.admin?.first_name)
-                    setCookie('lastName',  res?.data?.admin?.['last-name'])
-                    window.location.href = '/home'
+                    dispatch(SaveUserData(res?.data?.admin))
+                    setCookie('token', res?.token.split(' ')[1])
+                    setCookie('email', res?.data?.admin?.email)
+                    setRedirect(true)
                   } else ErrorAlert(res?.message || 'Authentication error')
                 }}
               >

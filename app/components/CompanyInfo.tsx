@@ -1,7 +1,11 @@
-import React from 'react'
-import Image from 'next/image'
+import React              from 'react'
+import Image              from 'next/image'
+import { useSelector }    from 'react-redux'
+import type { RootState } from '@r/store'
 
 const CompanyInfo = () => {
+  const userData : any = useSelector((state: RootState) => state.UserData)
+
   return (
     <>
       <div className='flex flex-col m-auto bg-white shadow-md rounded-md max-w-[1200px]'>
@@ -17,13 +21,14 @@ const CompanyInfo = () => {
                   htmlFor="name"
                   className='text-[#818181]'
                 >
-                  Name
+                  First Name
                 </label>
                 <input
                   type="text"
                   id='name'
-                  placeholder='Name'
-                  className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[36px]'
+                  placeholder='First Name'
+                  className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+                  defaultValue={ userData?.first_name }
                 />
               </div>
 
@@ -38,7 +43,8 @@ const CompanyInfo = () => {
                   type="text"
                   id='lastName'
                   placeholder='Last Name'
-                  className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[36px]'
+                  className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+                  defaultValue={ userData['last-name'] }
                 />
               </div>
             </div>
@@ -55,7 +61,8 @@ const CompanyInfo = () => {
                   type="text"
                   id='companyName'
                   placeholder='Company Name'
-                  className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[36px]'
+                  className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+                  defaultValue={ userData?.company_name }
                 />
               </div>
 
@@ -70,7 +77,8 @@ const CompanyInfo = () => {
                   type="text"
                   id='email'
                   placeholder='Email'
-                  className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[36px]'
+                  className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+                  defaultValue={ userData?.email }
                 />
               </div>
             </div>
@@ -85,9 +93,11 @@ const CompanyInfo = () => {
                 </label>
                 <select
                   id='country'
-                  className='bg-[#FAFAFA] border-2 rounded-md px-3 w-full h-[36px]'
+                  className='bg-[#FAFAFA] border-2 rounded-md px-3 w-full h-[45px]'
+                  defaultValue={ userData?.country }
                 >
                   <option value="---">Country</option>
+                  <option value="Argentina">Argentina</option>
                 </select>
               </div>
 
@@ -100,9 +110,11 @@ const CompanyInfo = () => {
                 </label>
                 <select
                   id='state'
-                  className='bg-[#FAFAFA] border-2 rounded-md px-3 w-full h-[36px]'
+                  className='bg-[#FAFAFA] border-2 rounded-md px-3 w-full h-[45px]'
+                  defaultValue={ userData?.state }
                 >
                   <option value="---">State</option>
+                  <option value="Cordoba">Cordoba</option>
                 </select>
               </div>
             </div>
@@ -136,7 +148,8 @@ const CompanyInfo = () => {
               type="text"
               id='companyAddress'
               placeholder='Company Address'
-              className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[36px]'
+              className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+              defaultValue={ userData?.address }
             />
           </div>
           
@@ -151,7 +164,8 @@ const CompanyInfo = () => {
               type="text"
               id='companyAddress2'
               placeholder='Company Address 2'
-              className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[36px]'
+              className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+              defaultValue={ userData?.address2 }
             />
           </div>
 
@@ -166,7 +180,8 @@ const CompanyInfo = () => {
               type="text"
               id='companyCity'
               placeholder='Company City'
-              className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[36px]'
+              className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+              defaultValue={ userData?.city }
             />
           </div>
           
@@ -181,7 +196,8 @@ const CompanyInfo = () => {
               type="text"
               id='companyZip'
               placeholder='Company Zip'
-              className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[36px]'
+              className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+              defaultValue={ userData?.zip }
             />
           </div>
         </div>
@@ -189,7 +205,7 @@ const CompanyInfo = () => {
         <div className='pb-6 flex items-center justify-center'>
           <input
             type="button"
-            className='bg-[#214F71] text-white font-bold px-4 py-[2px] rounded-md'
+            className='bg-[#214F71] text-white font-bold px-4 py-[2px] rounded-md h-[40px] cursor-pointer'
             value='Save Changes'
           />
         </div>

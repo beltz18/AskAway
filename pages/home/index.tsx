@@ -1,10 +1,11 @@
-import React from 'react'
-import MyHead      from "@c/MyHead"
-import Header      from "@c/Header"
-import CompanyMain from "@p/CompanyMain"
-import CompanyInfo from "@c/CompanyInfo"
-import JobManager  from "@c/JobManager"
-import Footer      from "@c/Footer"
+import React         from 'react'
+import MyHead        from "@c/MyHead"
+import Header        from "@c/Header"
+import CompanyMain   from "@p/CompanyMain"
+import CompanyInfo   from "@c/CompanyInfo"
+import JobManager    from "@c/JobManager"
+import Footer        from "@c/Footer"
+import { getCookie } from '@a/functions'
 
 const Home = () => {
   return (
@@ -21,3 +22,20 @@ const Home = () => {
 }
 
 export default Home
+
+export async function getServerSideProps({ req }: any) {
+  const token = getCookie('token', req)
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    }
+  } 
+  
+  return {
+    props: {}
+  }
+}

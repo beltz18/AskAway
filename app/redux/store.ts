@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
+import UserDataReducer    from '@r/slicers/AuthSlicer'
 
 export const store = configureStore({
-  reducer: {}
+  reducer: {
+    UserData: UserDataReducer,
+  },
 })
 
 export type RootState   = ReturnType<typeof store.getState>
