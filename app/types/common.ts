@@ -7,3 +7,8 @@ export interface THead {
   description?: string;
   language?: string;
 }
+
+export interface loginInfo {
+  email: string;
+  password: string;
+}

@@ -20,8 +20,10 @@
     "paths": {
       "@a/*": ["./app/*"],
       "@c/*": ["./app/components/*"],
+      "@i/*": ["./app/components/icons/*"],
       "@t/*": ["./app/types/*"],
       "@p/*": ["./app/sections/*"],
+      "@r/*": ["./app/redux/*"],
       "@s/*": ["./sass/*"],
     },
     "plugins": [

@@ -1,9 +1,9 @@
 import React      from 'react'
 import moment     from 'moment'
-import Edit       from './icons/Edit'
-import Trash      from './icons/Trash'
-import ArrowRight from './icons/ArrowRight'
-import Filter     from './icons/Filter'
+import Edit       from '@i/Edit'
+import Trash      from '@i/Trash'
+import ArrowRight from '@i/ArrowRight'
+import Filter     from '@i/Filter'
 
 const InterviewsTable = () => {
   return (
@@ -37,30 +37,30 @@ const InterviewsTable = () => {
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-500">
             <thead className="text-xs bg-white shadow-md uppercase">
-              <tr className='text-center py-6'>
-                <th scope="col" className="p-4"></th>
-                <th scope="col" className="px-6 py-3">
+              <tr className='text-center'>
+                <th scope="col" className="p-6"></th>
+                <th scope="col" className="p-6">
                   Date
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="p-6">
                   Branch
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="p-6">
                   Job Title
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="p-6">
                   Department
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="p-6">
                   Manager
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="p-6">
                   Candidate
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="p-6">
                   Duration
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="p-6">
                   Action
                 </th>
               </tr>
@@ -106,7 +106,7 @@ const InterviewsTable = () => {
 
           <nav className="flex items-center justify-between p-4 bg-white">
             <span className="text-sm font-normal text-center">
-              Showing page <span className="bg-gray-200 px-2 rounded-sm ml-3"><b>1</b> of 3</span>
+              Showing page: <span className="bg-gray-200 px-2 rounded-sm ml-3"><b className='text-primary'>1</b> of 3</span>
             </span>
 
             <ul className="inline-flex -space-x-px text-sm h-8">

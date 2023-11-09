@@ -3,7 +3,7 @@ import Image     from 'next/image'
 import Link      from 'next/link'
 import { Page }  from '@t/common'
 import { links } from '@a/global'
-import PowerOff  from './icons/PowerOff'
+import PowerOff  from '@i/PowerOff'
 
 const Header = ({ name }: Page) => {
   return (

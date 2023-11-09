@@ -3,7 +3,7 @@ export const links = {
     main: '/dashboard',
   },
   home: {
-    main: '/',
+    main: '/home',
   },
   interview: {
     main: '/interviews',

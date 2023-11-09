@@ -7,9 +7,9 @@ const InterviewsHeader = () => {
         <h2 className='text-[#009EA8] font-bold text-2xl'>All candidates</h2>
 
         <div className='flex flex-col border-l-2 pl-6 gap-4'>
-          <h3 className='text-[#009EA8] font-bold text-md'>Interviews available</h3>
+          <h3 className='text-[#009EA8] font-bold text-md'>Interviews available:</h3>
           
-          <div>
+          <div className='flex flex-col items-end gap-2'>
             <span className='text-[#898989] text-xs'>45/100</span>
             <div className="w-full bg-[#e3e3e9] rounded-md h-[30px]">
               <div className="bg-primary h-[30px] rounded-md w-[45%]"></div>
