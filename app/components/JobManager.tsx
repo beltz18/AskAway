@@ -19,7 +19,7 @@ const JobManager = () => {
         </div>
 
         <div className='flex items-center py-8 px-12 text-[#494949]'>
-          <span className='bg-[#F5F5F5] text-[#ABABAB] px-3 py-2 rounded-md border-2 cursor-pointer'>
+          <span className='bg-[#F5F5F5] text-[#444444] px-3 py-2 rounded-md border-2 cursor-pointer'>
             Add Job
           </span>
         </div>

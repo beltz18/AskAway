@@ -35,5 +35,5 @@ export {
   setCookie,
   getCookie,
   removeCookie,
-  PostAPI
+  PostAPI,
 }
