@@ -1,22 +1,53 @@
-import React      from 'react'
-import moment     from 'moment'
-import Edit       from '@i/Edit'
-import Trash      from '@i/Trash'
-import ArrowRight from '@i/ArrowRight'
-import Filter     from '@i/Filter'
+import React        from 'react'
+import Link         from 'next/link'
+import moment       from 'moment'
+import Questions    from '@c/Interview/Questions'
+import Candidates   from '@c/Interview/Candidates'
+import Panel        from '@c/Interview/Panel'
+import Modal        from '@c/Interview/Modal'
+import Edit         from '@i/Edit'
+import Trash        from '@i/Trash'
+import Filter       from '@i/Filter'
+import ArrowRight   from '@i/ArrowRight'
+import ArrowDown    from '@i/ArrowDown'
+import { useState } from 'react'
+import {
+  options,
+  intData,
+  intExpData,
+}  from '@a/global'
 
 const InterviewsTable = () => {
+  const [showInterview, setShowInterview] = useState([...Array(intData.length).keys()].map(i => false))
+  const [stepMenu, setStepMenu]   : any   = useState(1)
+  const [openModal, setOpenModal] : any   = useState(false)
+
+  const newState = (index: number) => {
+    let state = [...Array(intData.length).keys()].map(i => false)
+    state[index] = !showInterview[index]
+    setStepMenu(1)
+    return state
+  }
+
   return (
     <>
       <div className='mt-12 max-w-[1200px] m-auto'>
         <div className='my-12 flex items-center justify-between'>
-          <span className='bg-[#214F71] text-white py-[6px] px-6 rounded-md cursor-pointer'>Create Interview</span>
+          <span
+            className='bg-[#214F71] text-white py-[6px] px-6 rounded-md cursor-pointer'
+            onClick={() => setOpenModal(!openModal) }
+          >
+            Create Interview
+          </span>
+
+          { openModal && (<Modal openModal={ openModal } setOpenModal={ setOpenModal } />) }
 
           <div className='flex items-center gap-6'>
             <div className='flex items-center gap-2'>
               <Filter />
               <span className='text-primary'>Search by:</span>
             </div>
+
             <input
               type="number"
               className='py-2 px-3 border-2 rounded-md'
@@ -24,6 +55,7 @@ const InterviewsTable = () => {
               max='2023'
               placeholder='Year'
             />
+            
             <input
               type="number"
               className="py-2 px-3 border-2 rounded-md"
@@ -38,69 +70,75 @@ const InterviewsTable = () => {
           <table className="w-full text-sm text-left text-gray-500">
             <thead className="text-xs bg-white shadow-md uppercase">
               <tr className='text-center'>
-                <th scope="col" className="p-6"></th>
-                <th scope="col" className="p-6">
-                  Date
-                </th>
-                <th scope="col" className="p-6">
-                  Branch
-                </th>
-                <th scope="col" className="p-6">
-                  Job Title
-                </th>
-                <th scope="col" className="p-6">
-                  Department
-                </th>
-                <th scope="col" className="p-6">
-                  Manager
-                </th>
-                <th scope="col" className="p-6">
-                  Candidate
-                </th>
-                <th scope="col" className="p-6">
-                  Duration
-                </th>
-                <th scope="col" className="p-6">
-                  Action
-                </th>
+                { options.map((option, index) => (<th key={ index } scope="col" className="p-6">{ option }</th>)) }
               </tr>
             </thead>
 
             <tbody className='border-t-2'>
-              <tr className="bg-white border-b hover:bg-gray-50 text-center">
-                <td className="w-4 p-4">
-                  <ArrowRight />
-                </td>
-                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                  { moment(Date()).format('LLLL') }
-                </th>
-                <td className="px-6 py-4">
-                  IT and Internet
-                </td>
-                <td className="px-6 py-4 text-primary">
-                  Software Developer
-                </td>
-                <td className="px-6 py-4">
-                  Software Developer
-                </td>
-                <td className="px-6 py-4">
-                  Leo Gonzalez
-                </td>
-                <td className="px-6 py-4">
-                  6
-                </td>
-                <td className="px-6 py-4">
-                  26 mins
-                </td>
-                <td className="px-6 py-4 flex items-center justify-center gap-2">
-                  <span className='bg-[#E3F1EB] rounded-md'>
-                    <Edit />
-                  </span>
-                  <span className='bg-[#FDDEE1] rounded-md'>
-                    <Trash />
-                  </span>
-                </td>
-              </tr>
+              {
+                intData.map((data, index) => (
+                  <>
+                    <tr key={ index } className="bg-white border-b hover:bg-gray-50 text-center">
+                      <td className="w-4 p-4">
+                        <span
+                          className='cursor-pointer'
+                          onClick={() => setShowInterview(newState(index))}
+                        >
+                          { showInterview[index] ? (<ArrowDown />) : (<ArrowRight />) }
+                        </span>
+                      </td>
+
+                      <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{ moment(data.date).format('LLLL') }</td>
+                      <td className="px-6 py-4">{ data.branch }</td>
+                      <td className="px-6 py-4 text-primary">{ data.jobTitle }</td>
+                      <td className="px-6 py-4">{ data.department }</td>
+                      <td className="px-6 py-4">{ data.manager }</td>
+                      <td className="px-6 py-4">{ data.candidate }</td>
+                      <td className="px-6 py-4">{ data.duration }</td>
+
+                      <td className="px-6 py-4 flex items-center justify-center gap-2">
+                        <span className='bg-[#E3F1EB] rounded-md'>
+                          <Edit />
+                        </span>
+                        <span className='bg-[#FDDEE1] rounded-md'>
+                          <Trash />
+                        </span>
+                      </td>
+                    </tr>
+
+                    <tr className={`${showInterview[index] ? '' : 'hidden'} bg-[#EAECF4] border-t-2`}>
+                      <td colSpan={ 10 } className='px-12 py-6'>
+                        <div>
+                          <div className='flex items-center gap-6 mb-6 pb-2 px-6 border-b-gray-300 border-b-[1px]'>
+                            <span
+                              className={`${stepMenu == 1 ? 'text-primary font-bold' : 'text-[#8E8E8E]'} cursor-pointer`}
+                              onClick={() => setStepMenu(1)}
+                            >
+                              Questions
+                            </span>
+                            <span
+                              className={`${stepMenu == 2 ? 'text-primary font-bold' : 'text-[#8E8E8E]'} cursor-pointer`}
+                              onClick={() => setStepMenu(2)}
+                            >
+                              Candidates
+                            </span>
+                            <span
+                              className={`${stepMenu == 3 ? 'text-primary font-bold' : 'text-[#8E8E8E]'} cursor-pointer`}
+                              onClick={() => setStepMenu(3)}
+                            >
+                              Panel Member
+                            </span>
+                          </div>
+
+                          { stepMenu == 1 && (<Questions  />) }
+                          { stepMenu == 2 && (<Candidates />) }
+                          { stepMenu == 3 && (<Panel      />) }
+                        </div>
+                      </td>
+                    </tr>
+                  </>                
+                ))
+              }
             </tbody>
           </table>
 
@@ -111,44 +149,44 @@ const InterviewsTable = () => {
 
             <ul className="inline-flex -space-x-px text-sm h-8">
               <li>
-                <a
+                <Link
                   href="#"
                   className="flex items-center justify-center px-3 h-8 ml-0 text-primary bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
                 >
                   Previous
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="#"
                   className="flex items-center justify-center px-3 h-8 text-primary bg-blue-50 border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
                 >
                   1
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="#"
                   className="flex items-center justify-center px-3 h-8 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
                 >
                   2
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="#"
                   className="flex items-center justify-center px-3 h-8 text-gray-500 bg-white border border-gray-300 hover:bg-blue-100 hover:text-blue-700"
                 >
                   3
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="#"
                   className="flex items-center justify-center px-3 h-8 text-primary bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
                 >
                   Next
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>

@@ -4,15 +4,14 @@ import 'react-toastify/dist/ReactToastify.css'
 import React, { useState, useEffect } from 'react'
 import Image                          from 'next/image'
 import Link                           from 'next/link'
-import Sullivan                       from '@i/Sullivan'
-import { links }                      from '@a/global'
-import { loginInfo }                  from "@t/common"
-import { PostAPI }                    from '@a/functions'
 import { ToastContainer, toast }      from 'react-toastify'
-import { setCookie }                  from '@a/functions'
 import { useDispatch }                from 'react-redux'
-import { SaveUserData }               from '@r/slicers/AuthSlicer'
 import { useRouter }                  from 'next/navigation'
+import { links }                      from '@a/global'
+import { PostAPI, setCookie }         from '@a/functions'
+import Sullivan                       from '@i/Sullivan'
+import { loginInfo }                  from "@t/common"
+import { SaveUserData }               from '@r/slicers/AuthSlicer'
 
 const LoginView = () => {
   // Router

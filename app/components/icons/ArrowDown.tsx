@@ -1,9 +1,9 @@
 import React from 'react'
 
-const ArrowRight = () => {
+const ArrowDown = () => {
   return (
     <>
-      <svg width="40px" height="40px" viewBox="0 0 24 24">
+      <svg width="40px" height="40px" viewBox="0 0 24 24" transform='rotate(90)'>
         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
         <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
         <g id="SVGRepo_iconCarrier">
@@ -14,4 +14,4 @@ const ArrowRight = () => {
   )
 }
 
-export default ArrowRight
+export default ArrowDown
