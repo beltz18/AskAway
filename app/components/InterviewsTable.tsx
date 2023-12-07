@@ -1,6 +1,7 @@
 import React        from 'react'
+import { useState } from 'react'
 import Link         from 'next/link'
-import moment       from 'moment'
+import { options }  from '@a/global'
 import Questions    from '@c/Interview/Questions'
 import Candidates   from '@c/Interview/Candidates'
 import Panel        from '@c/Interview/Panel'
@@ -10,14 +11,9 @@ import Trash        from '@i/Trash'
 import Filter       from '@i/Filter'
 import ArrowRight   from '@i/ArrowRight'
 import ArrowDown    from '@i/ArrowDown'
-import { useState } from 'react'
-import {
-  options,
-  intData,
-  intExpData,
-}  from '@a/global'
 
-const InterviewsTable = () => {
+const InterviewsTable = ({ data }: any) => {
+  let intData = data
   const [showInterview, setShowInterview] = useState([...Array(intData.length).keys()].map(i => false))
   const [stepMenu, setStepMenu]   : any   = useState(1)
   const [openModal, setOpenModal] : any   = useState(false)
@@ -35,7 +31,7 @@ const InterviewsTable = () => {
         <div className='my-12 flex items-center justify-between'>
           <span
             className='bg-[#214F71] text-white py-[6px] px-6 rounded-md cursor-pointer'
-            onClick={() => setOpenModal(!openModal) }
+            onClick={() => setOpenModal(!openModal)}
           >
             Create Interview
           </span>
@@ -76,7 +72,7 @@ const InterviewsTable = () => {
 
             <tbody className='border-t-2'>
               {
-                intData.map((data, index) => (
+                data?.map((data: any, index: number) => (
                   <>
                     <tr key={ index } className="bg-white border-b hover:bg-gray-50 text-center">
                       <td className="w-4 p-4">
@@ -88,13 +84,11 @@ const InterviewsTable = () => {
                         </span>
                       </td>
 
-                      <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{ moment(data.date).format('LLLL') }</td>
-                      <td className="px-6 py-4">{ data.branch }</td>
-                      <td className="px-6 py-4 text-primary">{ data.jobTitle }</td>
-                      <td className="px-6 py-4">{ data.department }</td>
-                      <td className="px-6 py-4">{ data.manager }</td>
-                      <td className="px-6 py-4">{ data.candidate }</td>
-                      <td className="px-6 py-4">{ data.duration }</td>
+                      <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{ Intl.DateTimeFormat(navigator.language, { weekday: 'long', month: 'short', day: 'numeric' }).format(new Date()) }</td>
+                      <td className="px-6 py-4 text-primary whitespace-nowrap">{ data?.jobTitle }</td>
+                      <td className="px-6 py-4">{ data?.manager }</td>
+                      <td className="px-6 py-4">{ data?.data[0]?.['candidate-data']?.email }</td>
+                      <td className="px-6 py-4">{ /* here goes the total */ } mins</td>
 
                       <td className="px-6 py-4 flex items-center justify-center gap-2">
                         <span className='bg-[#E3F1EB] rounded-md'>
@@ -130,9 +124,9 @@ const InterviewsTable = () => {
                             </span>
                           </div>
 
-                          { stepMenu == 1 && (<Questions  />) }
-                          { stepMenu == 2 && (<Candidates />) }
-                          { stepMenu == 3 && (<Panel      />) }
+                          { stepMenu == 1 && (<Questions  questions={ data?.questions } />) }
+                          { stepMenu == 2 && (<Candidates candidates={ data?.data }     />) }
+                          { stepMenu == 3 && (<Panel      panel={ data?.panelMember }   />) }
                         </div>
                       </td>
                     </tr>

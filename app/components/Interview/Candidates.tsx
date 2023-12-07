@@ -2,7 +2,7 @@ import React from 'react'
 import Trash from '@i/Trash'
 import Edit  from '@i/Edit'
 
-const Candidates = () => {
+const Candidates = ({ candidates }: any) => {
   return (
     <>
       <div className='px-10'>
@@ -18,45 +18,32 @@ const Candidates = () => {
           </thead>
           
           <tbody>
-            <tr className='text-center'>
-              <td><b className='text-primary'>1.</b> Andi Montilla</td>
-              <td>1</td>
-              <td>andi@email.com</td>
-              <td>
-                <select className='text-xs border-none'>
-                  <option value='not_accepted'>Not Accepted</option>
-                  <option value='accepted'>Accepted</option>
-                </select>
-              </td>
-              <td className="px-6 py-4 flex items-center justify-center gap-2">
-                <span className='rounded-md'>
-                  <Edit />
-                </span>
-                <span className='rounded-md'>
-                  <Trash />
-                </span>
-              </td>
-            </tr>
-
-            <tr className='text-center'>
-              <td><b className='text-primary'>2.</b> John Doe</td>
-              <td>3</td>
-              <td>johnd@email.com</td>
-              <td>
-                <select className='text-xs border-none'>
-                  <option value='not_accepted'>Not Accepted</option>
-                  <option value='accepted'>Accepted</option>
-                </select>
-              </td>
-              <td className="px-6 py-4 flex items-center justify-center gap-2">
-                <span className='rounded-md'>
-                  <Edit />
-                </span>
-                <span className='rounded-md'>
-                  <Trash />
-                </span>
-              </td>
-            </tr>
+            { 
+              candidates?.map((c: any, index: number) => (
+                <tr className='text-center'>
+                  <td className='capitalize'><b className='text-primary'>{ index+1 }.</b> { c?.['candidate-data']?.first_name } { c?.['candidate-data']?.last_name }</td>
+                  <td>{ c?.['candidate-data']?.attempt }</td>
+                  <td>{ c?.['candidate-data']?.email }</td>
+                  <td>
+                    <select
+                      className='text-xs border-none'
+                      defaultValue={ c?.['candidate-data']?.status }
+                    >
+                      <option value='Not Assigned'>Not Assigned</option>
+                      <option value='Assigned'>Assigned</option>
+                    </select>
+                  </td>
+                  <td className="px-6 py-4 flex items-center justify-center gap-2">
+                    <span className='rounded-md'>
+                      <Edit />
+                    </span>
+                    <span className='rounded-md'>
+                      <Trash />
+                    </span>
+                  </td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
 

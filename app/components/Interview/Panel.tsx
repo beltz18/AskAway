@@ -2,7 +2,7 @@ import React from 'react'
 import Edit  from '../icons/Edit'
 import Trash from '../icons/Trash'
 
-const Panel = () => {
+const Panel = ({ panel }: any) => {
   return (
     <>
       <div className='px-10'>
@@ -16,31 +16,22 @@ const Panel = () => {
           </thead>
           
           <tbody>
-            <tr className='text-center'>
-              <td colSpan={ 3 }><b className='text-primary'>1.</b> Andi Montilla</td>
-              <td>andi@email.com</td>
-              <td className="px-6 py-4 flex items-center justify-center gap-2">
-                <span className='rounded-md'>
-                  <Edit />
-                </span>
-                <span className='rounded-md'>
-                  <Trash />
-                </span>
-              </td>
-            </tr>
-
-            <tr className='text-center'>
-              <td colSpan={ 3 }><b className='text-primary'>2.</b> John Doe</td>
-              <td>johnd@email.com</td>
-              <td className="px-6 py-4 flex items-center justify-center gap-2">
-                <span className='rounded-md'>
-                  <Edit />
-                </span>
-                <span className='rounded-md'>
-                  <Trash />
-                </span>
-              </td>
-            </tr>
+            {
+              panel?.map((p: any, index: number) => (
+                <tr className='text-center'>
+                  <td colSpan={ 3 } className='capitalize'><b className='text-primary'>{ index+1 }.</b> { p?.firstName } { p?.lastName }</td>
+                  <td>{ p?.email }</td>
+                  <td className="px-6 py-4 flex items-center justify-center gap-2">
+                    <span className='rounded-md'>
+                      <Edit />
+                    </span>
+                    <span className='rounded-md'>
+                      <Trash />
+                    </span>
+                  </td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
 

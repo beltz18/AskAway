@@ -31,9 +31,23 @@ const PostAPI = async (dataAuth: any) => {
   return res
 }
 
+const GetAPI = async (token: any) => {
+  try {
+    const res = await (await fetch(`${process.env.NEXT_PUBLIC_SERVER}${process.env.NEXT_PUBLIC_INTERV_ROUTE}`, {
+      method: "GET",
+      headers: {
+        'Authorization': `bearer ${token}`
+      }
+    })).json()
+    
+    return res?.data
+  } catch (err) { console.log(err) }
+}
+
 export {
   setCookie,
   getCookie,
   removeCookie,
   PostAPI,
+  GetAPI,
 }
