@@ -84,7 +84,7 @@ const InterviewsTable = ({ data }: any) => {
                         </span>
                       </td>
 
-                      <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{ Intl.DateTimeFormat(navigator.language, { weekday: 'long', month: 'short', day: 'numeric' }).format(new Date()) }</td>
+                      <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{ Intl.DateTimeFormat('en', { weekday: 'long', month: 'short', day: 'numeric' }).format(new Date()) }</td>
                       <td className="px-6 py-4 text-primary whitespace-nowrap">{ data?.jobTitle }</td>
                       <td className="px-6 py-4">{ data?.manager }</td>
                       <td className="px-6 py-4">{ data?.data[0]?.['candidate-data']?.email }</td>
