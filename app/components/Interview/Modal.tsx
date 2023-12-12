@@ -1,8 +1,15 @@
-import React         from 'react'
-import Stepper       from '@c/Interview/Stepper'
-import FormCandidate from '@c/Interview/FormCandidate'
+import React              from 'react'
+import { useSelector }    from 'react-redux'
+import Stepper            from '@c/Interview/Stepper'
+import FormCandidate      from '@c/Interview/FormCandidate'
+import FormPanel          from '@c/Interview/FormPanel'
+import FormQuestions      from '@c/Interview/FormQuestions'
+import type { RootState } from '@r/store'
+
 
 const Modal = ({ openModal, setOpenModal }: any) => {
+  const step : any = useSelector((state: RootState) => state.Step.step)
+
   return (
     <>
       <div className="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -34,7 +41,9 @@ const Modal = ({ openModal, setOpenModal }: any) => {
               <Stepper />
             </div>
 
-            <FormCandidate />
+            { step == 1 && (<FormCandidate />) }
+            { step == 2 && (<FormPanel     />) }
+            { step == 3 && (<FormQuestions />) }
           </div>
         </div>
       </div>

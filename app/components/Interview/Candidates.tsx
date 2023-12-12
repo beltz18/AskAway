@@ -1,6 +1,8 @@
 import React from 'react'
-import Trash from '@i/Trash'
-import Edit  from '@i/Edit'
+import {
+  Edit,
+  Trash,
+}  from '@i/InterviewIcons'
 
 const Candidates = ({ candidates }: any) => {
   return (

@@ -1,4 +1,10 @@
-import React from 'react'
+import React              from 'react'
+import type { RootState } from '@r/store'
+import { SetStep }        from '@r/slicers/StepperSlicer'
+import {
+  useDispatch,
+  useSelector
+} from 'react-redux'
 import {
   stepCheckedCss,
   stepUncheckedCss,
@@ -11,7 +17,8 @@ import {
 } from '@i/ModalIcons'
 
 const Stepper = () => {
-  const [step, setStep] = React.useState(1)
+  const dispatch   = useDispatch()
+  const step : any = useSelector((state: RootState) => state.Step.step)
   
   return (
     <>
@@ -19,7 +26,7 @@ const Stepper = () => {
         <ol className="flex items-center w-full">
           <li
             className={`${step == 1 ? stepCheckedCss : stepUncheckedCss}`}
-            onClick={() => setStep(1)}
+            onClick={() => dispatch(SetStep({ step: 1 }))}
           >
             <span className={`${step == 1 ? 'bg-blue-100' : 'bg-gray-100'} flex items-center justify-center w-10 h-10 rounded-full shrink-0`}>
               { step == 1 ? (<Check />) : (<User />) }
@@ -28,7 +35,7 @@ const Stepper = () => {
 
           <li
             className={`${step == 2 ? stepCheckedCss : stepUncheckedCss}`}
-            onClick={() => setStep(2)}
+            onClick={() => dispatch(SetStep({ step: 2 }))}
           >
             <span className={`${step == 2 ? 'bg-blue-100' : 'bg-gray-100'} flex items-center justify-center w-10 h-10 rounded-full shrink-0`}>
               { step == 2 ? (<Check />) : (<Panel />) }
@@ -37,7 +44,7 @@ const Stepper = () => {
 
           <li
             className={`flex items-center cursor-pointer`}
-            onClick={() => setStep(3)}
+            onClick={() => dispatch(SetStep({ step: 3 }))}
           >
             <span className={`${step == 3 ? 'bg-blue-100' : 'bg-gray-100'} flex items-center justify-center w-10 h-10 rounded-full shrink-0`}>
               { step == 3 ? (<Check />) : (<Task />) }

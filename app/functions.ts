@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import axios   from 'axios'
 
 // Set Cookie
 const setCookie = (key: string, value: any) : void => { Cookies.set(key, value, { expires: 1 }) }
@@ -20,15 +21,8 @@ const removeCookie = (key: string) : void => { Cookies.remove(key) }
 
 // PostAPI
 const PostAPI = async (dataAuth: any) => {
-  const res = await (await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}`, {
-    method: "POST",
-    headers: {
-      'Content-Type': "application/json",
-    },
-    body: JSON.stringify(dataAuth),
-  })).json()
-
-  return res
+  const res = await axios.post(`${process.env.NEXT_PUBLIC_API_SERVER}`, dataAuth)
+  return res?.data
 }
 
 const GetAPI = async (token: any) => {

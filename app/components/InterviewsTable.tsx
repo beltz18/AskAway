@@ -6,11 +6,13 @@ import Questions    from '@c/Interview/Questions'
 import Candidates   from '@c/Interview/Candidates'
 import Panel        from '@c/Interview/Panel'
 import Modal        from '@c/Interview/Modal'
-import Edit         from '@i/Edit'
-import Trash        from '@i/Trash'
-import Filter       from '@i/Filter'
-import ArrowRight   from '@i/ArrowRight'
-import ArrowDown    from '@i/ArrowDown'
+import {
+  ArrowDown,
+  ArrowRight,
+  Edit,
+  Filter,
+  Trash,
+} from '@i/InterviewIcons'
 
 const InterviewsTable = ({ data }: any) => {
   let intData = data

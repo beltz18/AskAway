@@ -1,6 +1,8 @@
 import React from 'react'
-import Edit  from '../icons/Edit'
-import Trash from '../icons/Trash'
+import {
+  Edit,
+  Trash,
+}  from '@i/InterviewIcons'
 
 const Panel = ({ panel }: any) => {
   return (

@@ -10,7 +10,7 @@ const initialState: userInfo = {
   status: '',
 }
 
-export const UserInfo = createSlice({
+const UserInfo = createSlice({
   name: 'UserData',
   initialState,
   reducers: {
