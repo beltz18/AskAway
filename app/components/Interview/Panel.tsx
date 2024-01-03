@@ -20,7 +20,7 @@ const Panel = ({ panel }: any) => {
           <tbody>
             {
               panel?.map((p: any, index: number) => (
-                <tr className='text-center'>
+                <tr key={ index } className='text-center'>
                   <td colSpan={ 3 } className='capitalize'><b className='text-primary'>{ index+1 }.</b> { p?.firstName } { p?.lastName }</td>
                   <td>{ p?.email }</td>
                   <td className="px-6 py-4 flex items-center justify-center gap-2">

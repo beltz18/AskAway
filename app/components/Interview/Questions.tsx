@@ -12,7 +12,7 @@ const Questions = ({ questions }: any) => {
           <ul className='flex flex-col gap-2'>
             {
               questions?.map((q: any, index: number) => (  
-                <li className='capitalize'><b className='text-primary'>{ index+1 }.</b> { q?.question }</li>
+                <li key={ index } className='capitalize'><b className='text-primary'>{ index+1 }.</b> { q?.question }</li>
               ))
             }
           </ul>
@@ -22,8 +22,8 @@ const Questions = ({ questions }: any) => {
           <span className='text-primary font-bold'>Total Allowed</span>
           <ul className='flex flex-col gap-2'>
             {
-              questions?.map((q: any) => (
-                <li><b className='text-primary'>{ parseInt(q?.time) }</b> mins</li>
+              questions?.map((q: any, index: number) => (
+                <li key={ index }><b className='text-primary'>{ parseInt(q?.time) }</b> mins</li>
               ))
             }
           </ul>

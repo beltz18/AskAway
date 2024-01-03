@@ -22,7 +22,7 @@ const Candidates = ({ candidates }: any) => {
           <tbody>
             { 
               candidates?.map((c: any, index: number) => (
-                <tr className='text-center'>
+                <tr key={ index } className='text-center'>
                   <td className='capitalize'><b className='text-primary'>{ index+1 }.</b> { c?.first_name } { c?.last_name }</td>
                   <td>{ c?.attempts }</td>
                   <td>{ c?.email }</td>

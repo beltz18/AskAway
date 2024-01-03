@@ -1,16 +1,16 @@
-import React                 from "react"
-import { useDispatch }       from "react-redux"
-import { GetAPI, setCookie } from "@a/functions"
-import { getCookie }         from "@a/functions"
-import InterviewsHeader      from "@c/InterviewsHeader"
-import InterviewsTable       from "@c/InterviewsTable"
-import MyHead                from "@c/MyHead"
-import Header                from "@c/Header"
-import Footer                from "@c/Footer"
-import CompanyMain           from "@p/CompanyMain"
-import { SetInterviews }     from "@r/slicers/InterviewsSlicer"
+import React             from "react"
+import { useDispatch }   from "react-redux"
+import { GetAPI }        from "@a/functions"
+import { getCookie }     from "@a/functions"
+import InterviewsHeader  from "@c/InterviewsHeader"
+import InterviewsTable   from "@c/InterviewsTable"
+import MyHead            from "@c/MyHead"
+import Header            from "@c/Header"
+import Footer            from "@c/Footer"
+import CompanyMain       from "@p/CompanyMain"
+import { SetInterviews } from "@r/slicers/InterviewsSlicer"
 
-const index = ({ interviewsData, interviewsAvailable, adminToken }: any) => {
+const InterviewsPage = ({ interviewsData, interviewsAvailable, adminToken }: any) => {
   const dispatch : any = useDispatch()
   let data : any = []
 
@@ -37,7 +37,7 @@ const index = ({ interviewsData, interviewsAvailable, adminToken }: any) => {
   )
 }
 
-export default index
+export default InterviewsPage
 
 export async function getServerSideProps ({ req }: any) {
   if(process.env.NODE_ENV == 'development')
