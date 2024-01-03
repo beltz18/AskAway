@@ -1,17 +1,36 @@
 import React, { useState } from 'react'
 import { useDispatch }     from 'react-redux'
 import { useSelector }     from 'react-redux'
+import { toast }           from 'react-toastify'
+import md5                 from 'md5'
+import uuid4               from 'uuid4'
 import { Trash, Clip }     from '@i/InterviewIcons'
 import type { RootState }  from '@r/store'
 import { SetStep }         from '@r/slicers/StepperSlicer'
 import { AddNewQuestion }  from '@r/slicers/QuestionsSlicer'
+import { AddNewInterview } from '@r/slicers/InterviewsSlicer'
+import { ClearCandidates } from '@r/slicers/CandidatesSlicer'
+import { ClearPanel }      from '@r/slicers/PanelSlicer'
+import { ClearQuestions }  from '@r/slicers/QuestionsSlicer'
+import {
+  reorderQuestions,
+  reorderCandidateData,
+  reorderPanelData,
+  reorderManagerData,
+  POST_TO_API,
+} from '@a/functions'
 
-const FormQuestions = () => {
+const FormQuestions = ({ token, setOpenModal }: any) => {
   // redux states
   const dispatch      : any = useDispatch()
   const candidateData : any = useSelector((state: RootState) => state.CandidateData.candidates)
   const panelData     : any = useSelector((state: RootState) => state.PanelData.panel)
   const questions     : any = useSelector((state: RootState) => state.QuestionsData.questions)
+  const userData      : any = useSelector((state: RootState) => state.UserData)
+
+  // Alerts
+  const SuccessAlert : any  = (message: string) => toast.success(message)
+  const ErrorAlert   : any  = (message: string) => toast.error(message)
 
   // local states
   const [question, setQuestion]   = useState('')
@@ -26,10 +45,30 @@ const FormQuestions = () => {
     dispatch(AddNewQuestion(newArr))
   }
 
-  const showValues = () => {
-    console.log(candidateData)
-    console.log(panelData)
-    console.log(questions)
+  // handle register interviews
+  const registerInterview = async () => {
+    const newInterview = {
+      "questions": reorderQuestions(questions),
+      "token": md5(uuid4()),
+      "manager-token": userData['adminKey'],
+      "candidate-data": reorderCandidateData(candidateData),
+      "owner_data": reorderManagerData(userData),
+      "panel": reorderPanelData(panelData),
+      "eventId": md5(uuid4()),
+      "isFree": true,
+      "createdAt": new Date(),
+    }
+
+    const res = await POST_TO_API(token, { newInterview }, process.env.NEXT_PUBLIC_NEWINTERVIEW)
+    if (res?.response?.status) {
+      setOpenModal(false)
+      SuccessAlert(res?.response?.message)
+      dispatch(AddNewInterview(newInterview))
+      dispatch(ClearCandidates())
+      dispatch(ClearPanel())
+      dispatch(ClearQuestions())
+    }
+    else ErrorAlert(res?.response?.message)
   }
 
   return (
@@ -73,7 +112,6 @@ const FormQuestions = () => {
 
                 <select
                   id="minutes"
-                  defaultValue={3}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   onChange={(e: any) => setTimeMins(e.target.value)}
                   value={ timeMins }
@@ -157,7 +195,10 @@ const FormQuestions = () => {
             
             {
               questions.map((q: any, index: number) => (
-                <div className='mt-1 py-1 w-full flex items-center justify-between border-b-2'>
+                <div
+                  key={ index }
+                  className='mt-1 py-1 w-full flex items-center justify-between border-b-2'
+                >
                   <h6 className='text-slate-600 font-semibold text-sm'>{ q.question }</h6>
             
                   <div className='flex items-center gap-16'>
@@ -187,7 +228,7 @@ const FormQuestions = () => {
           <button
             type="button"
             className="text-white inline-flex items-center border-2 border-[#214F71] bg-[#214F71] hover:bg-blue-900 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-12 py-2 text-center"
-            onClick={ showValues }
+            onClick={ registerInterview }
           >
             SUBMIT
           </button>

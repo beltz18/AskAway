@@ -1,5 +1,4 @@
 'use client'
-import 'react-toastify/dist/ReactToastify.css'
 
 import React, { useState, useEffect } from 'react'
 import Image                          from 'next/image'
@@ -124,6 +123,7 @@ const LoginView = () => {
                     dispatch(SaveUserData(res?.data?.admin))
                     setCookie('token', res?.token.split(' ')[1])
                     setCookie('email', res?.data?.admin?.email)
+                    setCookie('admin', res?.data?.admin?.adminKey)
                     setRedirect(true)
                   } else ErrorAlert(res?.message || 'Authentication error')
                 }}

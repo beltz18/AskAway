@@ -8,7 +8,7 @@ export const Stepper = createSlice({
   name: 'step',
   initialState,
   reducers: {
-    SetStep(state, action) {
+    SetStep: (state, action) => {
       return {
         ...state,
         ...action.payload

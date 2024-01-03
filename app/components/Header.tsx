@@ -1,16 +1,16 @@
 import React              from 'react'
 import Image              from 'next/image'
 import Link               from 'next/link'
-import { Page }           from '@t/common'
-import { links }          from '@a/global'
-import PowerOff           from '@i/PowerOff'
-import { removeCookie }   from '@a/functions'
 import { useSelector }    from 'react-redux'
+import { links, Cookies } from '@a/global'
+import { removeCookie }   from '@a/functions'
+import PowerOff           from '@i/PowerOff'
+import { Page }           from '@t/common'
 import type { RootState } from '@r/store'
 
 const Header = ({ name }: Page) => {
-  const userData : any = useSelector((state: RootState) => state.UserData)
-  
+  const user : any = useSelector((state: RootState) => state.UserData)
+
   return (
     <>
       <div className='bg-primary px-[5%] w-full h-[70px] flex justify-between items-center'>
@@ -37,14 +37,13 @@ const Header = ({ name }: Page) => {
 
         <div className='flex items-center gap-6'>
           <span className='text-primary font-bold px-[10px] py-[2px] rounded-full bg-white'>
-            { `${userData?.first_name} ${userData['last-name']}` }
+            { `${user?.first_name} ${user?.['last-name']}` }
           </span>
           <Link
             onClick={() => {
-              removeCookie('token')
-              removeCookie('firstName')
-              removeCookie('lastName')
-              removeCookie('email')
+              Cookies?.map((c: any) => {
+                removeCookie(c)
+              })
             }}
             href={ links.login.main }
           >

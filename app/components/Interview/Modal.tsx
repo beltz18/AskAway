@@ -7,7 +7,7 @@ import FormQuestions      from '@c/Interview/FormQuestions'
 import type { RootState } from '@r/store'
 
 
-const Modal = ({ openModal, setOpenModal }: any) => {
+const Modal = ({ setOpenModal, token }: any) => {
   const step : any = useSelector((state: RootState) => state.Step.step)
 
   return (
@@ -24,7 +24,7 @@ const Modal = ({ openModal, setOpenModal }: any) => {
                 <button
                   type="button"
                   className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                  onClick={() => setOpenModal(!openModal)}
+                  onClick={() => setOpenModal(false)}
                 >
                   <svg className="w-3 h-3" viewBox="0 0 14 14">
                     <path
@@ -43,7 +43,7 @@ const Modal = ({ openModal, setOpenModal }: any) => {
 
             { step == 1 && (<FormCandidate />) }
             { step == 2 && (<FormPanel     />) }
-            { step == 3 && (<FormQuestions />) }
+            { step == 3 && (<FormQuestions token={ token } setOpenModal={ setOpenModal } />) }
           </div>
         </div>
       </div>

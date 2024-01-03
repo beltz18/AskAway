@@ -9,7 +9,7 @@ const FormCandidate = () => {
   const [fname, setFname] = useState('')
   const [lname, setLname] = useState('')
   const [email, setEmail] = useState('')
-  const [id, setId]       = useState(0)
+  const [id, setId]       = useState('')
   const dispatch : any    = useDispatch()
   const candidateData     = useSelector((state: RootState) => state.CandidateData.candidates)
   // uagFDxltG0n3kEvq
@@ -18,6 +18,13 @@ const FormCandidate = () => {
     let newArr : any = []
     candidateData.filter((value: any, i: number) => { if (i != index) newArr.push(value) })
     dispatch(AddNewCandidate(newArr))
+  }
+
+  const handleEmptyInputs = () => {
+    setFname('')
+    setLname('')
+    setEmail('')
+    setId('')
   }
 
   return (
@@ -40,6 +47,7 @@ const FormCandidate = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               placeholder="First Name"
               onChange={(e: any) => setFname(e.target.value)}
+              value={ fname }
             />
           </div>
 
@@ -58,6 +66,7 @@ const FormCandidate = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               placeholder="Last Name"
               onChange={(e: any) => setLname(e.target.value)}
+              value={ lname }
             />
           </div>
 
@@ -76,6 +85,7 @@ const FormCandidate = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               placeholder="Email"
               onChange={(e: any) => setEmail(e.target.value)}
+              value={ email }
             />
           </div>
 
@@ -94,6 +104,7 @@ const FormCandidate = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               placeholder="ID"
               onChange={(e: any) => setId(e.target.value)}
+              value={ id }
             />
           </div>
 
@@ -108,6 +119,7 @@ const FormCandidate = () => {
                   email: email,
                   id: id,
                 }))
+                handleEmptyInputs()
               }}
             >
               <svg className="me-1 -ms-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -125,7 +137,10 @@ const FormCandidate = () => {
         <div>
           {
             candidateData?.length > 0 && candidateData?.map(({ firstName, lastName }: any, index) => (
-              <div className='bg-slate-300 py-1 px-3 rounded-full inline-flex items-center gap-2 mr-3 mb-2'>
+              <div
+                key={ index }
+                className='bg-slate-300 py-1 px-3 rounded-full inline-flex items-center gap-2 mr-3 mb-2'
+              >
                 <span>
                   { firstName } { lastName }
                 </span>

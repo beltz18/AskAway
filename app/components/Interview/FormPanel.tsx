@@ -18,6 +18,12 @@ const FormPanel = () => {
     dispatch(AddNewPanelMember(newArr))
   }
 
+  const handleEmptyInputs = () => {
+    setFname('')
+    setLname('')
+    setEmail('')
+  }
+
   return (
     <>
       <form className="p-6">
@@ -38,6 +44,7 @@ const FormPanel = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               placeholder="First Name"
               onChange={(e: any) => setFname(e.target.value)}
+              value={ fname }
             />
           </div>
 
@@ -56,6 +63,7 @@ const FormPanel = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               placeholder="Last Name"
               onChange={(e: any) => setLname(e.target.value)}
+              value={ lname }
             />
           </div>
 
@@ -74,6 +82,7 @@ const FormPanel = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               placeholder="Email"
               onChange={(e: any) => setEmail(e.target.value)}
+              value={ email }
             />
           </div>
 
@@ -89,6 +98,7 @@ const FormPanel = () => {
                   lastName: lname,
                   email: email,
                 }))
+                handleEmptyInputs()
               }}
             >
               <svg className="me-1 -ms-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -106,7 +116,10 @@ const FormPanel = () => {
         <div>
           {
             panelData?.length > 0 && panelData?.map(({ firstName, lastName }: any, index: number) => (
-              <div className='bg-slate-300 py-1 px-3 rounded-full inline-flex items-center gap-2 mr-3 mb-2'>
+              <div
+                key={ index }
+                className='bg-slate-300 py-1 px-3 rounded-full inline-flex items-center gap-2 mr-3 mb-2'
+              >
                 <span>
                   { firstName } { lastName }
                 </span>

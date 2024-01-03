@@ -8,7 +8,7 @@ const CandidateData = createSlice({
   name: 'newCandidate',
   initialState,
   reducers: {
-    AddNewCandidate(state:any, action) {
+    AddNewCandidate: (state:any, action) => {
       const newCandidate = action.payload
 
       if (typeof newCandidate?.length != 'undefined') {
@@ -22,10 +22,12 @@ const CandidateData = createSlice({
           candidates: [...state.candidates, newCandidate],
         }
       }
-
+    },
+    ClearCandidates: (state: any) => {
+      return initialState
     }
   }
 })
 
-export const { AddNewCandidate } = CandidateData.actions
+export const { AddNewCandidate, ClearCandidates } = CandidateData.actions
 export default CandidateData.reducer

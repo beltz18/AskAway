@@ -8,7 +8,7 @@ const QuestionData = createSlice({
   name: 'newQuestion',
   initialState,
   reducers: {
-    AddNewQuestion(state:any, action) {
+    AddNewQuestion: (state:any, action) => {
       const newQuestion = action.payload
 
       if (typeof newQuestion?.length != 'undefined') {
@@ -22,9 +22,12 @@ const QuestionData = createSlice({
           questions: [...state.questions, newQuestion],
         }
       }
+    },
+    ClearQuestions: (state: any) => {
+      return initialState
     }
   }
 })
 
-export const { AddNewQuestion } = QuestionData.actions
+export const { AddNewQuestion, ClearQuestions } = QuestionData.actions
 export default QuestionData.reducer

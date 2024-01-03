@@ -1,5 +1,5 @@
 export interface Page {
-  name: string
+  name: string,
 }
 
 export interface THead {

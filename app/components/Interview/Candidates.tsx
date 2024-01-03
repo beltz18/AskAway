@@ -23,13 +23,13 @@ const Candidates = ({ candidates }: any) => {
             { 
               candidates?.map((c: any, index: number) => (
                 <tr className='text-center'>
-                  <td className='capitalize'><b className='text-primary'>{ index+1 }.</b> { c?.['candidate-data']?.first_name } { c?.['candidate-data']?.last_name }</td>
-                  <td>{ c?.['candidate-data']?.attempt }</td>
-                  <td>{ c?.['candidate-data']?.email }</td>
+                  <td className='capitalize'><b className='text-primary'>{ index+1 }.</b> { c?.first_name } { c?.last_name }</td>
+                  <td>{ c?.attempts }</td>
+                  <td>{ c?.email }</td>
                   <td>
                     <select
                       className='text-xs border-none'
-                      defaultValue={ c?.['candidate-data']?.status }
+                      defaultValue={ c?.status }
                     >
                       <option value='Not Assigned'>Not Assigned</option>
                       <option value='Assigned'>Assigned</option>
