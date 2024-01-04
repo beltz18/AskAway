@@ -4,9 +4,10 @@ import Link               from 'next/link'
 import { useSelector }    from 'react-redux'
 import { links, Cookies } from '@a/global'
 import { removeCookie }   from '@a/functions'
+import LanguageSelector   from '@c/LanguageSelector'
 import PowerOff           from '@i/PowerOff'
-import { Page }           from '@t/common'
 import type { RootState } from '@r/store'
+import { Page }           from '@t/common'
 
 const Header = ({ name }: Page) => {
   const user : any = useSelector((state: RootState) => state.UserData)
@@ -18,8 +19,8 @@ const Header = ({ name }: Page) => {
           <Image
             src='/assets/logo_nobg.png'
             alt='AskAway logo'
-            width={100}
-            height={100}
+            width={ 100 }
+            height={ 100 }
           />
         </Link>
 
@@ -37,35 +38,16 @@ const Header = ({ name }: Page) => {
 
         <div className='flex items-center gap-6'>
           <span className='text-primary font-bold px-[10px] py-[2px] rounded-full bg-white'>
-            { `${user?.first_name} ${user?.['last-name']}` }
+            {`${user?.first_name} ${user?.['last-name']}`}
           </span>
           <Link
-            onClick={() => {
-              Cookies?.map((c: any) => {
-                removeCookie(c)
-              })
-            }}
+            onClick={() => Cookies?.map((c: any) => removeCookie(c))}
             href={ links.login.main }
           >
             <PowerOff />
           </Link>
           <div className='flex gap-4'>
-            <Image
-              src='/assets/united-states.png'
-              alt='en'
-              title='English | Inglés'
-              width={25}
-              height={25}
-              className='cursor-pointer'
-            />
-            <Image
-              src='/assets/spain.png'
-              alt='es'
-              title='Spanish | Español'
-              width={25}
-              height={25}
-              className='cursor-pointer'
-            />
+            <LanguageSelector />
           </div>
         </div>
       </div>

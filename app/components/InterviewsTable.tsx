@@ -17,6 +17,8 @@ const InterviewsTable = ({ token }: any) => {
   const [showInterview, setShowInterview] = useState([...Array(intData.length).keys()].map(i => false))
   const [stepMenu, setStepMenu]   : any   = useState(1)
   const [openModal, setOpenModal] : any   = useState(false)
+  const [redYear, setRedYear]     : any   = useState(false)
+  const [redMonth, setRedMonth]   : any   = useState(false)
 
   // Change states
   const newState = (index: number) => {
@@ -24,6 +26,17 @@ const InterviewsTable = ({ token }: any) => {
     state[index] = !showInterview[index]
     setStepMenu(1)
     return state
+  }
+
+  // Handle incorrect value
+  const handleIncorrect = (min: number, max: number, e: any, set: any) => {
+    let val = e.target.value
+    let arr = []
+    let con = true
+
+    for (let i = min; i <= max; i++) arr.push(i)
+    arr.map((c: number) => { if (c == parseInt(val)) con = false })
+    set(con)
   }
 
   return (
@@ -46,27 +59,37 @@ const InterviewsTable = ({ token }: any) => {
             )
           }
 
-          <div className='flex items-center gap-6'>
-            <div className='flex items-center gap-2'>
+          <div className='flex justify-center items-center gap-6'>
+            <div className='flex mt-6 items-center gap-2'>
               <Filter />
               <span className='text-primary'>Search by:</span>
             </div>
 
-            <input
-              type="number"
-              className='py-2 px-3 border-2 rounded-md'
-              min='2022'
-              max='2023'
-              placeholder='Year'
-            />
-            
-            <input
-              type="number"
-              className="py-2 px-3 border-2 rounded-md"
-              min='1'
-              max='12'
-              placeholder='Month'
-            />
+            <div className='flex flex-col'>
+              <span className={`${ redMonth ? 'text-red-600' : 'text-[#F5F6FA]' }`}>Incorrect value</span>
+              <input
+                type="number"
+                className="py-2 px-3 border-2 rounded-md"
+                min='1'
+                max='12'
+                placeholder='Month'
+                onChange={(e) => handleIncorrect(1, 12, e, setRedMonth)}
+                onBlur={() => setRedMonth(false)}
+              />
+            </div>
+
+            <div className='flex flex-col'>
+              <span className={`${ redYear ? 'text-red-600' : 'text-[#F5F6FA]' }`}>Incorrect value</span>
+              <input
+                type="number"
+                className='py-2 px-3 border-2 rounded-md'
+                min='2022'
+                max={ new Date().getFullYear() }
+                placeholder='Year'
+                onChange={(e) => handleIncorrect(2022, new Date().getFullYear(), e, setRedYear)}
+                onBlur={() => setRedYear(false)}
+              />
+            </div>
           </div>
         </div>
 
@@ -108,7 +131,10 @@ const InterviewsTable = ({ token }: any) => {
             </tbody>
           </table>
 
-          <NavFooter />
+          <NavFooter
+            pages={ 1 }
+            current={ 1 }
+          />
         </div>
       </div>
     </>

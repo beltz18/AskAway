@@ -31,5 +31,13 @@ export const Cookies = [
   'email',
 ]
 
+export const Language = {
+  'spanish': 'es',
+  'english': 'en',
+}
+
 export const stepCheckedCss   : string = 'flex w-full items-center text-blue-600 after:w-full after:h-1 after:border-b after:border-blue-100 after:border-4 after:inline-block dark:after:border-blue-800 cursor-pointer'
 export const stepUncheckedCss : string = 'flex w-full items-center text-gray-500 after:w-full after:h-1 after:border-b after:border-gray-100 after:border-4 after:inline-block dark:after:border-gray-700 cursor-pointer'
+
+export const cssCurrentPage   : string = 'flex items-center justify-center px-3 h-8 text-primary bg-blue-50 border border-gray-300 hover:bg-gray-100 hover:text-gray-700'
+export const cssNormalPage    : string = 'flex items-center justify-center px-3 h-8 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700'

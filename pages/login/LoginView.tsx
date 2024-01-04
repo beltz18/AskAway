@@ -8,6 +8,7 @@ import { useDispatch }                from 'react-redux'
 import { useRouter }                  from 'next/navigation'
 import { links }                      from '@a/global'
 import { PostAPI, setCookie }         from '@a/functions'
+import LanguageSelector               from '@c/LanguageSelector'
 import Sullivan                       from '@i/Sullivan'
 import { loginInfo }                  from "@t/common"
 import { SaveUserData }               from '@r/slicers/AuthSlicer'
@@ -37,9 +38,7 @@ const LoginView = () => {
   }
 
   // Redirect
-  useEffect(() => {
-    if (redirect) push('/home')
-  }, [redirect])
+  useEffect(() => { if (redirect) push('/home') }, [redirect])
 
   return (
     <>
@@ -57,22 +56,8 @@ const LoginView = () => {
         </div>
 
         <div className='w-[100%] md:w-[70%] flex flex-col relative items-center justify-center gap-12'>
-          <div className='absolute top-2 right-2 flex items-center gap-2 mr-5'>
-            <Image
-              src='/assets/united-states.png'
-              alt='English | Inglés'
-              width={100}
-              height={100}
-              className='w-auto h-[25px] cursor-pointer'
-            />
-            <span className='font-bold text-xl text-primary'>/</span>
-            <Image
-              src='/assets/spain.png'
-              alt='Spanish | Español'
-              width={100}
-              height={100}
-              className='w-auto h-[25px] cursor-pointer'
-            />
+          <div className='absolute top-2 right-2 flex items-center gap-4 mr-5'>
+            <LanguageSelector />
           </div>
 
           <div className='md:mt-5 w-[90%] max-w-[500px] shadow-2xl p-6 flex flex-col gap-6 rounded-xl'>

@@ -1,8 +1,6 @@
 import React from 'react'
 
 const InterviewsHeader = ({ c }: any) => {
-  const percentage = `w-[${c * 10}%]`
-
   return (
     <>
       <div className='flex justify-between items-center m-auto bg-white shadow-md rounded-md max-w-[1200px] p-6'>
@@ -13,8 +11,9 @@ const InterviewsHeader = ({ c }: any) => {
           
           <div className='flex flex-col items-end gap-2'>
             <span className='text-[#898989] text-xs'>{ c }/10</span>
+            
             <div className="w-full bg-[#e3e3e9] rounded-md h-[30px]">
-              <div className={`bg-primary h-[30px] rounded-md ${percentage}`}></div>
+              <div className="bg-primary h-[30px] rounded-md" style={{ width: `${c * 10}%` }}></div>
             </div>
           </div>
         </div>

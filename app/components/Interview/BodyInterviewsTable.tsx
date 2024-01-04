@@ -48,7 +48,6 @@ const BodyInterviewsTable = ({
       let newArr: Array<any> = []
       dataInterv?.map((c: any, i: number) => { if (index != i) newArr.push(c) })
       dispatcher(SetInterviews(newArr))
-      console.log(newArr)
       SuccessAlert(res?.response?.message)
     } else ErrorAlert('Error deleting the interview')
   }
@@ -76,9 +75,7 @@ const BodyInterviewsTable = ({
               <td className="px-6 py-4 flex items-center justify-center gap-2">
                 <span
                   className='bg-[#E3F1EB] rounded-md'
-                  onClick={async () => {
-                    await EditInterview(data, token)
-                  }}
+                  onClick={async () => { await EditInterview(data, token) }}
                 >
                   <Edit />
                 </span>

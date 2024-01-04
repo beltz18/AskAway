@@ -1,54 +1,76 @@
-import React from 'react'
-import Link  from 'next/link'
+import React        from 'react'
+import { useState } from 'react'
+import {
+  cssCurrentPage,
+  cssNormalPage,
+} from '@a/global'
 
-const NavFooter = () => {
+const NavFooter = ({ pages, current }: any) => {
+  // States
+  const [currentPage, setCurrentPage]   = useState(current)
+  const [prevDisabled, setPrevDisabled] = useState(current == 1 ? true : false)
+  const [nextDisabled, setNextDisabled] = useState(pages   == 1 ? true : false)
+
+  // Array
+  let arr = []
+
+  // Set Array
+  if (pages > 1) { for (let i = 1; i <= pages; i++) arr.push(i) }
+  else arr.push(1)
+
+  // Handle change the current page
+  const handleChangePage = (type: string, thisC: number) => {
+    if (type == 'plus') {
+      setCurrentPage(currentPage+1)
+      setPrevDisabled(false)
+      if (thisC+1 == pages) setNextDisabled(true)
+    }
+    else if (type == 'minus' && currentPage >= 1) {
+      setCurrentPage(currentPage-1)
+      setNextDisabled(false)
+      if (thisC-1 == 1) setPrevDisabled(true)
+    }
+  }
+
   return (
     <>
       <nav className="flex items-center justify-between p-4 bg-white">
         <span className="text-sm font-normal text-center">
-          Showing page: <span className="bg-gray-200 px-2 rounded-sm ml-3"><b className='text-primary'>1</b> of 3</span>
+          Showing page: <span className="bg-gray-200 px-2 rounded-sm ml-3"><b className='text-primary'>{ current }</b> of { pages }</span>
         </span>
 
         <ul className="inline-flex -space-x-px text-sm h-8">
           <li>
-            <Link
-              href="#"
-              className="flex items-center justify-center px-3 h-8 ml-0 text-primary bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
+            <button
+              type='button'
+              className={`flex items-center justify-center px-3 h-8 ml-0 border border-gray-300 rounded-l-lg
+              ${!prevDisabled ? 'bg-white text-primary hover:bg-gray-100 hover:text-gray-700' : 'bg-gray-300 text-white'}`}
+              disabled={ prevDisabled }
+              onClick={() => handleChangePage('minus', currentPage)}
             >
               Previous
-            </Link>
+            </button>
           </li>
+          {
+            arr?.map((p: any, i: number) => (
+              <li
+                key={ i }
+                className={`${p == currentPage ? cssCurrentPage : cssNormalPage}`}
+              >
+                { p }
+              </li>
+            ))
+          }
           <li>
-            <Link
-              href="#"
-              className="flex items-center justify-center px-3 h-8 text-primary bg-blue-50 border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-            >
-              1
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="#"
-              className="flex items-center justify-center px-3 h-8 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-            >
-              2
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="#"
-              className="flex items-center justify-center px-3 h-8 text-gray-500 bg-white border border-gray-300 hover:bg-blue-100 hover:text-blue-700"
-            >
-              3
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="#"
-              className="flex items-center justify-center px-3 h-8 text-primary bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
+            <button
+              type='button'
+              className={`flex items-center justify-center px-3 h-8 border border-gray-300 rounded-r-lg
+              ${!nextDisabled ? 'bg-white text-primary hover:bg-gray-100 hover:text-gray-700' : 'bg-gray-300 text-white'}`}
+              disabled={ nextDisabled }
+              onClick={() => handleChangePage('plus', currentPage)}
             >
               Next
-            </Link>
+            </button>
           </li>
         </ul>
       </nav>

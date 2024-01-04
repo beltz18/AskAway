@@ -14,8 +14,6 @@ const InterviewsPage = ({ interviewsData, interviewsAvailable, adminToken }: any
   const dispatch : any = useDispatch()
   let data       : any = []
 
-  console.log(interviewsData)
-
   if (interviewsData) {
     data = interviewsData
     dispatch(SetInterviews(interviewsData))
