@@ -12,7 +12,9 @@ import { SetInterviews } from "@r/slicers/InterviewsSlicer"
 
 const InterviewsPage = ({ interviewsData, interviewsAvailable, adminToken }: any) => {
   const dispatch : any = useDispatch()
-  let data : any = []
+  let data       : any = []
+
+  console.log(interviewsData)
 
   if (interviewsData) {
     data = interviewsData
@@ -48,20 +50,10 @@ export async function getServerSideProps ({ req }: any) {
 
   const dataC = await GetAPI(token, process.env.NEXT_PUBLIC_COMPANY_INFO)
   const dataI = await GetAPI(token, `${process.env.NEXT_PUBLIC_INTERV_ROUTE}?token=${admin}`)
-    
-  if (dataI) {      
-    return {
-      props: {
-        interviewsData: dataI,
-        interviewsAvailable: dataC[0]?.admin?.remainingFreeTrialInterviews,
-        adminToken: token,
-      }
-    }
-  }
   
   return {
     props: {
-      interviewsData: [],
+      interviewsData: dataI,
       interviewsAvailable: dataC[0]?.admin?.remainingFreeTrialInterviews,
       adminToken: token,
     }

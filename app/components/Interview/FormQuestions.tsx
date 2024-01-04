@@ -67,6 +67,7 @@ const FormQuestions = ({ token, setOpenModal }: any) => {
       dispatch(ClearCandidates())
       dispatch(ClearPanel())
       dispatch(ClearQuestions())
+      dispatch(SetStep({ step: 1 }))
     }
     else ErrorAlert(res?.response?.message)
   }

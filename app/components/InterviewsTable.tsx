@@ -5,19 +5,20 @@ import { options }         from '@a/global'
 import Modal               from '@c/Interview/Modal'
 import BodyInterviewsTable from '@c/Interview/BodyInterviewsTable'
 import NavFooter           from '@c/Interview/NavFooter'
+import { Filter }          from '@i/InterviewIcons'
 import type { RootState }  from '@r/store'
-import {
-  Filter,
-} from '@i/InterviewIcons'
 
 const InterviewsTable = ({ token }: any) => {
+  // Redux store
   const data : any = useSelector((state: RootState) => state.InterviewsData.interviews)
 
+  // States
   let intData = data
   const [showInterview, setShowInterview] = useState([...Array(intData.length).keys()].map(i => false))
   const [stepMenu, setStepMenu]   : any   = useState(1)
   const [openModal, setOpenModal] : any   = useState(false)
 
+  // Change states
   const newState = (index: number) => {
     let state : any = [...Array(intData.length).keys()].map(i => false)
     state[index] = !showInterview[index]
@@ -73,12 +74,17 @@ const InterviewsTable = ({ token }: any) => {
           <table className="w-full text-sm text-left text-gray-500">
             <thead className="text-xs bg-white shadow-md uppercase">
               <tr className='text-center'>
-                { options.map((option, index) => (<th key={ index } scope="col" className="p-6">{ option }</th>)) }
+                {
+                  options.map((option, index) =>
+                    (<th key={ index } scope="col" className="p-6">{ option }</th>))
+                }
               </tr>
             </thead>
 
             <tbody className='border-t-2'>
               {
+                data.length > 0
+                  ?
                 data?.map((data: any, index: number) => (
                   <BodyInterviewsTable
                     key={ index }
@@ -89,8 +95,15 @@ const InterviewsTable = ({ token }: any) => {
                     newState={ newState }
                     stepMenu={ stepMenu }
                     setStepMenu={ setStepMenu }
+                    token={ token }
                   />
-                ))
+                )) : (
+                  <tr className="bg-white border-b hover:bg-gray-50 text-center">
+                    <td colSpan={ 9 } className='w-4 p-4 py-8'>
+                      No Interviews Scheduled.
+                    </td>
+                  </tr>
+                )
               }
             </tbody>
           </table>
