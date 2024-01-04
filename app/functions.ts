@@ -6,49 +6,22 @@ import uuid4   from 'uuid4'
 // Set Cookie
 const setCookie = (key: string, value: any) : void => { Cookies.set(key, value, { expires: 1 }) }
 
+// Remove Cookie
+const removeCookie = (key: string) : void => { Cookies.remove(key) }
+
 // Get Cookie
-const getCookie = (key: string, req: any) : string | undefined => {
-  if (!req.headers.cookie) return undefined
+const getCookie = (key: string, req: any) : string => {
+  if (!req.headers.cookie) return ''
 
   const cookies = req.headers.cookie.split(';').map((cookie: string) => cookie.trim())
   const cookie = cookies.find((cookie: string) => cookie.startsWith(`${key}=`))
 
-  if (!cookie) return undefined
+  if (!cookie) return ''
 
   return cookie.split('=')[1]
 }
 
-// Remove Cookie
-const removeCookie = (key: string) : void => { Cookies.remove(key) }
-
-// PostAPI
-const PostAPI = async (dataAuth: any) => {
-  const res = await axios.post(`${process.env.NEXT_PUBLIC_API_SERVER}`, dataAuth)
-  return res?.data
-}
-
-const POST_TO_API = async (token: any, data: any, route: any) => {
-  try {
-    const res = await axios.post(`${process.env.NEXT_PUBLIC_SERVER}${route}`, data, {
-      headers: { 'Authorization': `bearer ${token}` }
-    })
-    return res?.data
-  } catch (err) { console.log(err) }
-}
-
-const GetAPI = async (token: any, route: any) => {
-  try {
-    const res = await (await fetch(`${process.env.NEXT_PUBLIC_SERVER}${route}`, {
-      method: "GET",
-      headers: {
-        'Authorization': `bearer ${token}`
-      }
-    })).json()
-    
-    return res?.data
-  } catch (err) { console.log(err) }
-}
-
+// Reorder Questions
 const reorderQuestions = (questions: any) => {
   let newOrder : any = []
   let index : number = 0
@@ -68,6 +41,7 @@ const reorderQuestions = (questions: any) => {
   return newOrder
 }
 
+// Reorder candidate data
 const reorderCandidateData = (candidateData: any) => {
   let newOrder : any = []
   let index : number = 0
@@ -91,6 +65,7 @@ const reorderCandidateData = (candidateData: any) => {
   return newOrder
 }
 
+// Reorder panel data
 const reorderPanelData = (panelData: any) => {
   let newOrder : any = []
   let index : number = 1
@@ -109,6 +84,7 @@ const reorderPanelData = (panelData: any) => {
   return newOrder
 }
 
+// Reorder manager data
 const reorderManagerData = (userData: any) => {
   return {
     name: `${ userData['first_name'] } ${ userData['last-name'] }`,
@@ -124,11 +100,8 @@ export {
   setCookie,
   getCookie,
   removeCookie,
-  PostAPI,
-  GetAPI,
   reorderQuestions,
   reorderCandidateData,
   reorderPanelData,
   reorderManagerData,
-  POST_TO_API,
 }

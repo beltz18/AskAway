@@ -1,27 +1,28 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
-import Image                          from 'next/image'
-import Link                           from 'next/link'
-import { ToastContainer, toast }      from 'react-toastify'
-import { useDispatch }                from 'react-redux'
-import { useRouter }                  from 'next/navigation'
-import { links }                      from '@a/global'
-import { PostAPI, setCookie }         from '@a/functions'
-import LanguageSelector               from '@c/LanguageSelector'
-import Sullivan                       from '@i/Sullivan'
-import { loginInfo }                  from "@t/common"
-import { SaveUserData }               from '@r/slicers/AuthSlicer'
+import React            from 'react'
+import Image            from 'next/image'
+import Link             from 'next/link'
+import { toast }        from 'react-toastify'
+import { useDispatch }  from 'react-redux'
+import { useRouter }    from 'next/navigation'
+import { links }        from '@a/global'
+import { setCookie }    from '@a/functions'
+import { PostLogin }    from '@api/Post'
+import LanguageSelector from '@c/LanguageSelector'
+import Sullivan         from '@i/Sullivan'
+import { SaveUserData } from '@r/slicers/AuthSlicer'
+import { loginInfo }    from "@t/common"
 
 const LoginView = () => {
   // Router
   const { push } = useRouter()
   
   // States
-  const [email, setEmail]       : any = useState(null)
-  const [passw, setPassw]       : any = useState(null)
-  const [disabled, setDisabled] : any = useState(false)
-  const [redirect, setRedirect] : any = useState(false)
+  const [email, setEmail]       : any = React.useState(null)
+  const [passw, setPassw]       : any = React.useState(null)
+  const [disabled, setDisabled] : any = React.useState(false)
+  const [redirect, setRedirect] : any = React.useState(false)
 
   // Redux Stuff
   const dispatch = useDispatch()
@@ -38,12 +39,11 @@ const LoginView = () => {
   }
 
   // Redirect
-  useEffect(() => { if (redirect) push('/home') }, [redirect])
+  React.useEffect(() => { if (redirect) push('/home') }, [redirect])
 
   return (
     <>
       <div className='w-full h-[100vh] flex'>
-        <ToastContainer />
         <div className='hidden md:w-[30%] h-full bg-primary relative md:flex md:items-center'>
           <div className='absolute right-[-15%]'>
             <Image
@@ -102,7 +102,7 @@ const LoginView = () => {
                 title={ disabled ? 'Check your email' : 'Login' }
                 className={`${disabled ? 'bg-[#393D41]' : 'bg-primary'} text-white px-3 py-2 rounded-md w-[50%] text-xl text-center`}
                 onClick={async function () {
-                  const res = await PostAPI(dataAuth)
+                  const res = await PostLogin(dataAuth)
                   if (res?.success) {
                     SuccessAlert('Welcome!')
                     dispatch(SaveUserData(res?.data?.admin))

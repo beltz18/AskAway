@@ -1,23 +1,23 @@
-import React, { useState } from 'react'
-import { useDispatch }     from 'react-redux'
-import { useSelector }     from 'react-redux'
-import { toast }           from 'react-toastify'
-import md5                 from 'md5'
-import uuid4               from 'uuid4'
-import { Trash, Clip }     from '@i/InterviewIcons'
-import type { RootState }  from '@r/store'
-import { SetStep }         from '@r/slicers/StepperSlicer'
-import { AddNewQuestion }  from '@r/slicers/QuestionsSlicer'
-import { AddNewInterview } from '@r/slicers/InterviewsSlicer'
-import { ClearCandidates } from '@r/slicers/CandidatesSlicer'
-import { ClearPanel }      from '@r/slicers/PanelSlicer'
-import { ClearQuestions }  from '@r/slicers/QuestionsSlicer'
+import React, { useState }  from 'react'
+import { useDispatch }      from 'react-redux'
+import { useSelector }      from 'react-redux'
+import { toast }            from 'react-toastify'
+import md5                  from 'md5'
+import uuid4                from 'uuid4'
+import { PostNewInterview } from '@api/Post'
+import { Trash, Clip }      from '@i/InterviewIcons'
+import type { RootState }   from '@r/store'
+import { SetStep }          from '@r/slicers/StepperSlicer'
+import { AddNewQuestion }   from '@r/slicers/QuestionsSlicer'
+import { AddNewInterview }  from '@r/slicers/InterviewsSlicer'
+import { ClearCandidates }  from '@r/slicers/CandidatesSlicer'
+import { ClearPanel }       from '@r/slicers/PanelSlicer'
+import { ClearQuestions }   from '@r/slicers/QuestionsSlicer'
 import {
   reorderQuestions,
   reorderCandidateData,
   reorderPanelData,
   reorderManagerData,
-  POST_TO_API,
 } from '@a/functions'
 
 const FormQuestions = ({ token, setOpenModal }: any) => {
@@ -59,7 +59,8 @@ const FormQuestions = ({ token, setOpenModal }: any) => {
       "createdAt": new Date(),
     }
 
-    const res = await POST_TO_API(token, { newInterview }, process.env.NEXT_PUBLIC_NEWINTERVIEW)
+    const res = await PostNewInterview(token, newInterview)
+    
     if (res?.response?.status) {
       setOpenModal(false)
       SuccessAlert(res?.response?.message)
