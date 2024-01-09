@@ -4,7 +4,7 @@ import { Language } from '@a/global'
 
 const LanguageSelector = () => {
   const setLanguage = (lang: string) => {
-    console.log(lang, 'essadasd')
+    console.log(lang)
   }
 
   return (
