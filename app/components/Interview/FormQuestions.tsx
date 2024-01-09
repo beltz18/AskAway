@@ -59,7 +59,7 @@ const FormQuestions = ({ token, setOpenModal }: any) => {
       "createdAt": new Date(),
     }
 
-    const res = await PostNewInterview(token, newInterview)
+    const res = await PostNewInterview(token, { newInterview })
     
     if (res?.response?.status) {
       setOpenModal(false)

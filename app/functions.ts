@@ -1,5 +1,4 @@
 import Cookies from 'js-cookie'
-import axios   from 'axios'
 import md5     from 'md5'
 import uuid4   from 'uuid4'
 
@@ -19,6 +18,25 @@ const getCookie = (key: string, req: any) : string => {
   if (!cookie) return ''
 
   return cookie.split('=')[1]
+}
+
+// Generate an unique random string
+function generateUniqueString (length = 14) {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  let result = '';
+
+  // Use a cryptographically secure random number generator if available
+  const getRandomInt = typeof crypto !== 'undefined' && crypto.getRandomValues
+      ? (max: number) => crypto.getRandomValues(new Uint32Array(1))[0] % max
+      : Math.random;
+
+  while (result.length < length) {
+    const randomIndex = getRandomInt(charactersLength);
+    result += characters.charAt(randomIndex);
+  }
+
+  return result;
 }
 
 // Reorder Questions
@@ -58,6 +76,7 @@ const reorderCandidateData = (candidateData: any) => {
       department: "",
       completedOn: "",
       attempts: 0,
+      candidate_id: generateUniqueString(),
     })
     index++
   })

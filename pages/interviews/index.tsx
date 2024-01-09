@@ -1,4 +1,5 @@
 import React             from "react"
+import { Suspense }      from "react"
 import { useDispatch }   from "react-redux"
 import { getCookie }     from "@a/functions"
 import InterviewsHeader  from "@c/InterviewsHeader"
@@ -6,6 +7,7 @@ import InterviewsTable   from "@c/InterviewsTable"
 import MyHead            from "@c/MyHead"
 import Header            from "@c/Header"
 import Footer            from "@c/Footer"
+import Loader            from "@p/Loading"
 import CompanyMain       from "@p/CompanyMain"
 import { SetInterviews } from "@r/slicers/InterviewsSlicer"
 import {
@@ -22,20 +24,29 @@ const InterviewsPage = ({ interviewsData, interviewsAvailable, adminToken }: any
     dispatch(SetInterviews(interviewsData))
   }
 
+  const [isLoaded, setIsLoaded]  = React.useState(false)
+  React.useEffect(() => setIsLoaded(true))
+
   return (
     <>
       <MyHead title="AskAway" />
       <Header name="interview" />
-      <CompanyMain>
-        <InterviewsHeader
-          c={ interviewsAvailable }
-        />
-        <InterviewsTable
-          data={ data }
-          token={ adminToken }
-        />
-      </CompanyMain>
-      <Footer />
+      {
+        isLoaded
+          &&
+        <Suspense fallback={ <Loader /> }>
+          <CompanyMain>
+            <InterviewsHeader
+              c={ interviewsAvailable }
+            />
+            <InterviewsTable
+              data={ data }
+              token={ adminToken }
+            />
+          </CompanyMain>
+          <Footer />
+        </Suspense>
+      }
     </>
   )
 }
