@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRef }   from 'react'
 import {
   Record,
@@ -9,6 +9,7 @@ import {
 
 const BodyPractice = () => {
   const [stream, setStream] : any = useState(null)
+  const [mediaR, setMediaR] : any = useState(null)
   const [record, setRecord] : any = useState(false)
   const [playin, setPlayin] : any = useState(false)
   const [pausin, setPausin] : any = useState(false)
@@ -19,13 +20,14 @@ const BodyPractice = () => {
     await navigator.mediaDevices.getUserMedia({
       video: true,
       audio: {
-        width: { min: 720, ideal: 1280, max: 1920 },
-        height: { min: 576, ideal: 720, max: 1080 },
+        width:  { min: 720, max: 1920, ideal: 1280, },
+        height: { min: 576, max: 1080, ideal: 720,  },
         facingMode: "user"
       },
     })
       .then((stream) => {
         webCamVideo.current.srcObject = stream
+        setMediaR(new MediaRecorder(stream))
         setStream(stream)
       })
       .catch((err) => console.log(err))
@@ -37,16 +39,6 @@ const BodyPractice = () => {
     setRecord(false)
   }
 
-  // const toggleAudio = async () => {
-  //   setAudio(!audio)
-  //   stream.getAudioTracks()[0].enabled = audio
-  // }
-
-  // const toggleVideo = () => {
-  //   setVideo(!video)
-  //   stream.getVideoTracks()[0].enabled = video
-  // }
-
   return (
     <>
       <div className="w-full h-full flex flex-col relative">
@@ -57,8 +49,9 @@ const BodyPractice = () => {
             <h4 className='text-[#0396A1]'><b>2</b> / 2</h4>
           </div>
         </div>
+
         <div className='absolute left-0 w-full h-[90vh] flex items-center justify-center mt-6'>
-          <div className='w-[90%] md:w-[40%] bg-white p-2 shadow-2xl rounded-lg'>
+          <div className='w-[90%] md:w-[40%] h-[75vh] bg-white p-2 shadow-2xl rounded-lg'>
             <video
               ref={ webCamVideo }
               autoPlay
@@ -73,6 +66,7 @@ const BodyPractice = () => {
                 { record ? (<Stop />) : (<Record />) }
                 { record ? 'Stop' : 'Record' }
               </button>
+
               <button
                 className='bg-[#D9D9D961] w-[100px] px-3 py-2 rounded-md flex flex-col items-center justify-center'
                 disabled={ !record }
