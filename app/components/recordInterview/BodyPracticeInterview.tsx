@@ -2,43 +2,50 @@ import { useState } from 'react'
 import { useRef }   from 'react'
 import {
   Record,
+  Stop,
+  Play,
+  Pause,
 } from '@i/TakeTheInterviewIcons'
 
 const BodyPractice = () => {
-  const [audio, setAudio]   : any = useState(false)
-  const [video, setVideo]   : any = useState(false)
-  const [play, setPlay]     : any = useState(false)
   const [stream, setStream] : any = useState(null)
+  const [record, setRecord] : any = useState(false)
+  const [playin, setPlayin] : any = useState(false)
+  const [pausin, setPausin] : any = useState(false)
 
   const webCamVideo : any = useRef()
 
   const startStream = async () => {
     await navigator.mediaDevices.getUserMedia({
       video: true,
-      audio: true,
+      audio: {
+        width: { min: 720, ideal: 1280, max: 1920 },
+        height: { min: 576, ideal: 720, max: 1080 },
+        facingMode: "user"
+      },
     })
       .then((stream) => {
         webCamVideo.current.srcObject = stream
         setStream(stream)
       })
       .catch((err) => console.log(err))
-    setPlay(true)
+      setRecord(true)
   }
 
   const stopStream = async () => {
     stream.getTracks().forEach((track: any) => track.stop())
-    setPlay(false)
+    setRecord(false)
   }
 
-  const toggleAudio = async () => {
-    setAudio(!audio)
-    stream.getAudioTracks()[0].enabled = audio
-  }
+  // const toggleAudio = async () => {
+  //   setAudio(!audio)
+  //   stream.getAudioTracks()[0].enabled = audio
+  // }
 
-  const toggleVideo = () => {
-    setVideo(!video)
-    stream.getVideoTracks()[0].enabled = video
-  }
+  // const toggleVideo = () => {
+  //   setVideo(!video)
+  //   stream.getVideoTracks()[0].enabled = video
+  // }
 
   return (
     <>
@@ -51,23 +58,32 @@ const BodyPractice = () => {
           </div>
         </div>
         <div className='absolute left-0 w-full h-[90vh] flex items-center justify-center mt-6'>
-          <div className='w-[40%] bg-white p-2 shadow-2xl rounded-lg'>  
+          <div className='w-[90%] md:w-[40%] bg-white p-2 shadow-2xl rounded-lg'>
             <video
               ref={ webCamVideo }
               autoPlay
               playsInline
-              className='w-full rounded-lg bg-black'
+              className='w-full h-[75%] rounded-lg bg-black'
             />
-            <div className='p-5 flex gap-6 items-center justify-center'>
+            <div className='p-5 h-[25%] flex gap-6 items-center justify-center'>
               <button
-                className='bg-[#D9D9D961] px-3 py-2 rounded-md flex flex-col items-center justify-center'
-                onClick={ play ? stopStream : startStream }
+                className='bg-[#D9D9D961] w-[100px] px-3 py-2 rounded-md flex flex-col items-center justify-center'
+                onClick={ record ? stopStream : startStream }
               >
-                <Record />
-                Record
+                { record ? (<Stop />) : (<Record />) }
+                { record ? 'Stop' : 'Record' }
               </button>
-              <button onClick={ toggleAudio }>Sound</button>
-              <button onClick={ toggleVideo }>Video</button>
+              <button
+                className='bg-[#D9D9D961] w-[100px] px-3 py-2 rounded-md flex flex-col items-center justify-center'
+                disabled={ !record }
+                // onClick={ {} }
+              >
+                <Play
+                  color={!record ? '#525252' : '#1BB750'}
+                  // onClick={  }
+                />
+                Play
+              </button>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-const index = () => {
+const VideoInterviewTable = () => {
   const router : any    = useRouter()
   const { interviewId } = router.query
 
@@ -14,4 +14,4 @@ const index = () => {
   )
 }
 
-export default index
+export default VideoInterviewTable
