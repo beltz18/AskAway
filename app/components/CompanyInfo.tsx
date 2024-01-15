@@ -27,7 +27,7 @@ const CompanyInfo = () => {
                   type="text"
                   id='name'
                   placeholder='First Name'
-                  className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+                  className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-md px-3 w-full h-[45px]'
                   defaultValue={ userData?.first_name }
                 />
               </div>
@@ -43,7 +43,7 @@ const CompanyInfo = () => {
                   type="text"
                   id='lastName'
                   placeholder='Last Name'
-                  className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+                  className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-md px-3 w-full h-[45px]'
                   defaultValue={ userData['last-name'] }
                 />
               </div>
@@ -61,7 +61,7 @@ const CompanyInfo = () => {
                   type="text"
                   id='companyName'
                   placeholder='Company Name'
-                  className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+                  className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-md px-3 w-full h-[45px]'
                   defaultValue={ userData?.company_name }
                 />
               </div>
@@ -77,7 +77,7 @@ const CompanyInfo = () => {
                   type="text"
                   id='email'
                   placeholder='Email'
-                  className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+                  className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-md px-3 w-full h-[45px]'
                   defaultValue={ userData?.email }
                 />
               </div>
@@ -93,7 +93,7 @@ const CompanyInfo = () => {
                 </label>
                 <select
                   id='country'
-                  className='bg-[#FAFAFA] border-2 rounded-md px-3 w-full h-[45px]'
+                  className='bg-[#FAFAFA] border-1 rounded-md px-3 w-full h-[45px]'
                   defaultValue={ userData?.country }
                 >
                   <option value="---">Country</option>
@@ -110,7 +110,7 @@ const CompanyInfo = () => {
                 </label>
                 <select
                   id='state'
-                  className='bg-[#FAFAFA] border-2 rounded-md px-3 w-full h-[45px]'
+                  className='bg-[#FAFAFA] border-1 rounded-md px-3 w-full h-[45px]'
                   defaultValue={ userData?.state }
                 >
                   <option value="---">State</option>
@@ -148,7 +148,7 @@ const CompanyInfo = () => {
               type="text"
               id='companyAddress'
               placeholder='Company Address'
-              className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+              className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-md px-3 w-full h-[45px]'
               defaultValue={ userData?.address }
             />
           </div>
@@ -164,7 +164,7 @@ const CompanyInfo = () => {
               type="text"
               id='companyAddress2'
               placeholder='Company Address 2'
-              className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+              className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-md px-3 w-full h-[45px]'
               defaultValue={ userData?.address2 }
             />
           </div>
@@ -180,7 +180,7 @@ const CompanyInfo = () => {
               type="text"
               id='companyCity'
               placeholder='Company City'
-              className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+              className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-md px-3 w-full h-[45px]'
               defaultValue={ userData?.city }
             />
           </div>
@@ -196,7 +196,7 @@ const CompanyInfo = () => {
               type="text"
               id='companyZip'
               placeholder='Company Zip'
-              className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+              className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-md px-3 w-full h-[45px]'
               defaultValue={ userData?.zip }
             />
           </div>

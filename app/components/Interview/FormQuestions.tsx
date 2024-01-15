@@ -5,7 +5,7 @@ import { toast }            from 'react-toastify'
 import md5                  from 'md5'
 import uuid4                from 'uuid4'
 import { PostNewInterview } from '@api/Post'
-import { Trash, Clip }      from '@i/InterviewIcons'
+import { Trash, Clip, Edit }      from '@i/InterviewIcons'
 import type { RootState }   from '@r/store'
 import { SetStep }          from '@r/slicers/StepperSlicer'
 import { AddNewQuestion }   from '@r/slicers/QuestionsSlicer'
@@ -44,6 +44,7 @@ const FormQuestions = ({ token, setOpenModal }: any) => {
     questions.filter((value: any, i: number) => { if (i != index) newArr.push(value) })
     dispatch(AddNewQuestion(newArr))
   }
+
 
   // handle register interviews
   const registerInterview = async () => {
@@ -205,12 +206,20 @@ const FormQuestions = ({ token, setOpenModal }: any) => {
             
                   <div className='flex items-center gap-16'>
                     <h6 className='text-slate-600 font-semibold text-sm'>0{ q.timeMins }:{ parseInt(q.timeSecs) == 0 ? `0${q.timeSecs}` : q.timeSecs }m</h6>
-                    <h6
-                      className='bg-[#FDDEE1] rounded-md'
-                      onClick={() => deleteQuestion(index)}
+                    <div
+                      className='px-6 py-4 flex items-center justify-center gap-2'
                     >
+                      <span className='bg-[#E3F1EB] rounded-md cursor-pointer'
+                      //Aca va la funcion de editQuestion
+                      >
+                      <Edit />
+                      </span>
+                      <span className='bg-[#FDDEE1] rounded-md cursor-pointer'
+                      onClick={() => deleteQuestion(index)}
+                      >
                       <Trash />
-                    </h6>
+                      </span>
+                    </div>
                   </div>
                 </div>
               ))
@@ -224,7 +233,7 @@ const FormQuestions = ({ token, setOpenModal }: any) => {
             className="text-[#214F71] inline-flex items-center border-2 border-[#214F71] bg-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-12 py-2 text-center"
             onClick={() => dispatch(SetStep({ step: 2 }))}
           >
-            BACK
+            Back
           </button>
 
           <button
@@ -232,7 +241,7 @@ const FormQuestions = ({ token, setOpenModal }: any) => {
             className="text-white inline-flex items-center border-2 border-[#214F71] bg-[#214F71] hover:bg-blue-900 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-12 py-2 text-center"
             onClick={ registerInterview }
           >
-            SUBMIT
+            Submit
           </button>
         </div>
       </form>

@@ -17,7 +17,7 @@ const Modal = ({ setOpenModal, token }: any) => {
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <div className='shadow-md'>
               <div className="flex items-center justify-between p-4">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                <h3 className="text-xl font-bold text-[#009EA8] text-center ml-auto dark:text-white">
                   New Interview
                 </h3>
 
