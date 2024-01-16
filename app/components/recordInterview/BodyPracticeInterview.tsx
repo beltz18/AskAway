@@ -1,42 +1,63 @@
-import { useEffect, useState } from 'react'
-import { useRef }   from 'react'
+import { useEffect } from 'react'
+import { useRef }      from 'react'
+import { useState }    from 'react'
+import uuid4           from 'uuid4'
+import Webcam          from 'react-webcam'
 import {
   Record,
   Stop,
-  Play,
-  Pause,
 } from '@i/TakeTheInterviewIcons'
 
 const BodyPractice = () => {
-  const [stream, setStream] : any = useState(null)
-  const [mediaR, setMediaR] : any = useState(null)
+  const [chunks, setChunks] : any = useState([])
+  const [videoR, setVideoR] : any = useState(null)
   const [record, setRecord] : any = useState(false)
-  const [playin, setPlayin] : any = useState(false)
-  const [pausin, setPausin] : any = useState(false)
+  const [readyP, setReadyP] : any = useState(true)
 
-  const webCamVideo : any = useRef()
+  const webCamVideoRef : any = useRef(null)
+  const mediaRecorder  : any = useRef(null)
 
-  const startStream = async () => {
-    await navigator.mediaDevices.getUserMedia({
-      video: true,
-      audio: {
-        width:  { min: 720, max: 1920, ideal: 1280, },
-        height: { min: 576, max: 1080, ideal: 720,  },
-        facingMode: "user"
-      },
-    })
-      .then((stream) => {
-        webCamVideo.current.srcObject = stream
-        setMediaR(new MediaRecorder(stream))
-        setStream(stream)
-      })
-      .catch((err) => console.log(err))
-      setRecord(true)
+  const videoConstraints = {
+    width: 720,
+    height: 576,
+    facingMode: "user",
   }
 
-  const stopStream = async () => {
-    stream.getTracks().forEach((track: any) => track.stop())
+  const startStream = () => {
+    setReadyP(true)
+    setRecord(true)
+    mediaRecorder.current = new MediaRecorder(webCamVideoRef?.current?.stream, {
+      mimeType: "video/webm",
+    })
+    mediaRecorder.current.addEventListener(
+      "dataavailable",
+      handleData,
+    )
+    mediaRecorder.current.start()
+  }
+
+  const handleData = ({ data }: any) => setChunks(data)
+
+  const stopStream = () => {
+    mediaRecorder.current.stop()
     setRecord(false)
+    setReadyP(false)
+  }
+
+  useEffect(() => {
+    if (chunks?.size) downloadVideo()
+  }, [chunks])
+
+  const downloadVideo = () => {
+    const url : any = URL.createObjectURL(chunks)
+    const mp4 : any = document.createElement("a")
+    document.body.appendChild(mp4)
+    mp4.style = "display: none"
+    mp4.href  = url
+    mp4.download = `askaway-${ uuid4() }.webm`
+    mp4.click()
+    window.URL.revokeObjectURL(url)
+    setChunks([])
   }
 
   return (
@@ -51,32 +72,44 @@ const BodyPractice = () => {
         </div>
 
         <div className='absolute left-0 w-full h-[90vh] flex items-center justify-center mt-6'>
-          <div className='w-[90%] md:w-[40%] h-[75vh] bg-white p-2 shadow-2xl rounded-lg'>
-            <video
-              ref={ webCamVideo }
-              autoPlay
-              playsInline
-              className='w-full h-[75%] rounded-lg bg-black'
-            />
+          <div className='w-[90%] md:w-[40%] bg-white p-2 shadow-2xl rounded-lg'>
+            {
+              !readyP
+                ?
+              (
+                <video
+                  src={ videoR }
+                  ref={ mediaRecorder }
+                  autoPlay
+                  controls
+                  className='w-full h-[75%] rounded-lg bg-black'
+                />
+              )
+                :
+              (
+                <Webcam
+                  audio={ true }
+                  ref={ webCamVideoRef }
+                  videoConstraints={ videoConstraints }
+                />
+              )
+            }
             <div className='p-5 h-[25%] flex gap-6 items-center justify-center'>
               <button
                 className='bg-[#D9D9D961] w-[100px] px-3 py-2 rounded-md flex flex-col items-center justify-center'
-                onClick={ record ? stopStream : startStream }
+                onClick={ startStream }
+                disabled={ record }
               >
-                { record ? (<Stop />) : (<Record />) }
-                { record ? 'Stop' : 'Record' }
+                <Record color={ !record ? '#EA830A' : '#525252' } />
+                Record
               </button>
-
               <button
                 className='bg-[#D9D9D961] w-[100px] px-3 py-2 rounded-md flex flex-col items-center justify-center'
+                onClick={ stopStream }
                 disabled={ !record }
-                // onClick={ {} }
               >
-                <Play
-                  color={!record ? '#525252' : '#1BB750'}
-                  // onClick={  }
-                />
-                Play
+                <Stop color={ record ? '#DC0303' : '#525252' } />
+                Stop
               </button>
             </div>
           </div>
