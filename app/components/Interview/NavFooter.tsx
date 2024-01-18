@@ -34,12 +34,12 @@ const NavFooter = ({ pages, current }: any) => {
 
   return (
     <>
-      <nav className="flex items-center justify-between p-4 bg-white">
+      <nav className="flex items-center justify-between p-4 bg-white w-full">
         <span className="text-sm font-normal text-center">
           Showing page: <span className="bg-gray-200 px-2 rounded-sm ml-3"><b className='text-primary'>{ current }</b> of { pages }</span>
         </span>
 
-        <ul className="inline-flex -space-x-px text-sm h-8">
+        <ul className="inline-flex -space-x-px text-sm h-8 w-full">
           <li>
             <button
               type='button'

@@ -8,15 +8,15 @@ const CompanyInfo = () => {
 
   return (
     <>
-      <div className='flex flex-col m-auto bg-white shadow-md rounded-md max-w-[1200px]'>
+      <div className='flex flex-col m-auto bg-white shadow-md rounded-md max-w-[1200px] max-sm:flex-col'>
         <div className='shadow-md flex items-center justify-center py-6'>
           <h2 className='text-[#009EA8] font-bold text-2xl'>Company Information</h2>
         </div>
         
-        <div className='py-12 px-12 flex gap-12'>
-          <div className='w-[50%] flex flex-col justify-between'>
-            <div className='flex gap-6'>
-              <div className='flex flex-col gap-1 w-[50%]'>
+        <div className='py-12 px-12 flex gap-12 max-sm:flex-col'>
+          <div className='w-[50%] flex flex-col justify-between max-sm:flex-col max-sm:w-[100%] max-sm:gap-2.5'>
+            <div className='flex gap-6 max-sm:flex-col max-sm:gap-2.5'>
+              <div className='flex flex-col gap-1 w-[50%] max-sm:w-[100%]'>
                 <label
                   htmlFor="name"
                   className='text-[#818181]'
@@ -32,7 +32,7 @@ const CompanyInfo = () => {
                 />
               </div>
 
-              <div className='flex flex-col gap-1 w-[50%]'>
+              <div className='flex flex-col gap-1 w-[50%] max-sm:w-[100%] '>
                 <label
                   htmlFor="lastName"
                   className='text-[#818181]'
@@ -49,8 +49,8 @@ const CompanyInfo = () => {
               </div>
             </div>
 
-            <div className='flex gap-6'>
-              <div className='flex flex-col gap-1  w-[50%]'>
+            <div className='flex gap-6 max-sm:flex-col max-sm:gap-2.5'>
+              <div className='flex flex-col gap-1  w-[50%] max-sm:w-[100%]'>
                 <label
                   htmlFor="companyName"
                   className='text-[#818181]'
@@ -66,7 +66,7 @@ const CompanyInfo = () => {
                 />
               </div>
 
-              <div className='flex flex-col gap-1 w-[50%]'>
+              <div className='flex flex-col gap-1 w-[50%] max-sm:w-[100%]'>
                 <label
                   htmlFor="email"
                   className='text-[#818181]'
@@ -83,8 +83,8 @@ const CompanyInfo = () => {
               </div>
             </div>
 
-            <div className='flex gap-6'>
-              <div className='flex flex-col gap-1 w-[50%]'>
+            <div className='flex gap-6 max-sm:flex-col max-sm:gap-2.5'>
+              <div className='flex flex-col gap-1 w-[50%] max-sm:w-[100%]'>
                 <label
                   htmlFor="country"
                   className='text-[#818181]'
@@ -101,7 +101,7 @@ const CompanyInfo = () => {
                 </select>
               </div>
 
-              <div className='flex flex-col gap-1 w-[50%]'>
+              <div className='flex flex-col gap-1 w-[50%] max-sm:w-[100%]'>
                 <label
                   htmlFor="state"
                   className='text-[#818181]'
@@ -120,8 +120,8 @@ const CompanyInfo = () => {
             </div>
           </div>
 
-          <div className='w-[50%] flex items-center justify-center'>
-            <div className='bg-gray-100 border-2 border-gray-400 border-dashed rounded-lg w-[80%] flex flex-col items-center justify-center py-8'>
+          <div className='w-[50%] flex items-center justify-center max-sm:w-[100%] order-1'>
+            <div className='bg-gray-100 border-2 border-gray-400 border-dashed rounded-lg w-[80%] flex flex-col items-center justify-center py-8 max-sm:w-[100%]'>
               <Image
                 src='/assets/vector.png'
                 alt='image'
@@ -136,8 +136,8 @@ const CompanyInfo = () => {
           </div>
         </div>
 
-        <div className='pb-12 px-12 flex gap-6'>
-          <div className='flex flex-col gap-1 w-[25%]'>
+        <div className='pb-12 px-12 flex gap-6 max-sm:flex-col max-sm:gap-2.5'>
+          <div className='flex flex-col gap-1 w-[25%] max-sm:w-[100%]'>
             <label
               htmlFor="companyAddress"
               className='text-[#818181]'
@@ -153,7 +153,7 @@ const CompanyInfo = () => {
             />
           </div>
           
-          <div className='flex flex-col gap-1 w-[25%]'>
+          <div className='flex flex-col gap-1 w-[25%] max-sm:w-[100%]'>
             <label
               htmlFor="companyAddress2"
               className='text-[#818181]'
@@ -169,7 +169,7 @@ const CompanyInfo = () => {
             />
           </div>
 
-          <div className='flex flex-col gap-1 w-[25%]'>
+          <div className='flex flex-col gap-1 w-[25%] max-sm:w-[100%]'>
             <label
               htmlFor="companyCity"
               className='text-[#818181]'
@@ -185,7 +185,7 @@ const CompanyInfo = () => {
             />
           </div>
           
-          <div className='flex flex-col gap-1 w-[25%]'>
+          <div className='flex flex-col gap-1 w-[25%] max-sm:w-[100%]'>
             <label
               htmlFor="companyZip"
               className='text-[#818181]'
@@ -202,7 +202,7 @@ const CompanyInfo = () => {
           </div>
         </div>
 
-        <div className='pb-6 flex items-center justify-center'>
+        <div className='pb-6 flex items-center justify-center order-2'>
           <input
             type="button"
             className='bg-[#214F71] text-white font-bold px-4 py-[2px] rounded-md h-[40px] cursor-pointer'
