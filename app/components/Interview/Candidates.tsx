@@ -4,7 +4,7 @@ import {
   Trash,
 }  from '@i/InterviewIcons'
 
-const Candidates = ({ candidates }: any) => {
+const Candidates = ({ candidates }: any) : React.JSX.Element => {
   return (
     <>
       <div className='px-10'>

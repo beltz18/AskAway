@@ -4,7 +4,7 @@ import Link             from 'next/link'
 import { links }        from '@a/global'
 import LanguageSelector from '@c/LanguageSelector'
 
-const Header = () => {
+const Header = () : React.JSX.Element => {
   return (
     <>
       <div className='w-full h-[10vh] flex py-6 px-4 justify-between items-center'>

@@ -15,7 +15,11 @@ import {
   GetInterviews,
 } from '@api/Get'
 
-const InterviewsPage = ({ interviewsData, interviewsAvailable, adminToken }: any) => {
+const InterviewsPage = ({
+  interviewsData,
+  interviewsAvailable,
+  adminToken,
+}: any) : React.JSX.Element => {
   const dispatch : any = useDispatch()
   let data       : any = []
 

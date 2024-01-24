@@ -4,7 +4,7 @@ import {
   Trash,
 }  from '@i/InterviewIcons'
 
-const Panel = ({ panel }: any) => {
+const Panel = ({ panel }: any) : React.JSX.Element => {
   return (
     <>
       <div className='px-10'>

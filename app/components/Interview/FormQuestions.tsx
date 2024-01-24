@@ -20,7 +20,7 @@ import {
   reorderManagerData,
 } from '@a/functions'
 
-const FormQuestions = ({ token, setOpenModal }: any) => {
+const FormQuestions = ({ token, setOpenModal }: any) : React.JSX.Element => {
   // redux states
   const dispatch      : any = useDispatch()
   const candidateData : any = useSelector((state: RootState) => state.CandidateData.candidates)

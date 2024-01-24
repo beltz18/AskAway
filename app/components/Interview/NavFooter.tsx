@@ -5,7 +5,7 @@ import {
   cssNormalPage,
 } from '@a/global'
 
-const NavFooter = ({ pages, current }: any) => {
+const NavFooter = ({ pages, current }: any) : React.JSX.Element => {
   // States
   const [currentPage, setCurrentPage]   = useState(current)
   const [prevDisabled, setPrevDisabled] = useState(current == 1 ? true : false)

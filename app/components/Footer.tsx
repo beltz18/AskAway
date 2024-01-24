@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-const Footer = () => {
+const Footer = () : React.JSX.Element => {
   return (
     <>
       <footer className='bg-white w-full p-6 flex items-center justify-center'>

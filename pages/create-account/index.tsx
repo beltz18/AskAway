@@ -5,7 +5,7 @@ import Sullivan  from '@a/components/icons/Sullivan'
 import MyHead    from '@c/MyHead'
 import { links } from '@a/global'
 
-const SignUp = () => {
+const SignUp = () : React.JSX.Element => {
   return (
     <>
       <MyHead title="AskAway - Create Account" />

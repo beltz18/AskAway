@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-const VideoInterviewTable = () => {
+const VideoInterviewTable = () : React.JSX.Element => {
   const router : any    = useRouter()
   const { interviewId } = router.query
 

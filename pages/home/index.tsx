@@ -7,7 +7,7 @@ import JobManager    from "@c/JobManager"
 import Footer        from "@c/Footer"
 import { getCookie } from '@a/functions'
 
-const Home = () => {
+const Home = () : React.JSX.Element => {
   return (
     <>
       <MyHead title="AskAway" />

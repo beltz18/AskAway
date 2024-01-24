@@ -2,7 +2,7 @@ import React     from 'react'
 import Head      from 'next/head'
 import { THead } from '@t/common'
 
-const MyHead = ({ title, description, language }: THead) => {
+const MyHead = ({ title, description, language }: THead) : React.JSX.Element => {
   return (
     <>
       <Head>

@@ -5,7 +5,7 @@ import CompanyMain from "@p/CompanyMain"
 
 import Footer      from "@c/Footer"
 
-const index = () => {
+const index = () : React.JSX.Element => {
   return (
     <>
       <MyHead title="AskAway" />

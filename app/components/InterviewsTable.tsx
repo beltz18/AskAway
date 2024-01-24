@@ -8,7 +8,7 @@ import NavFooter           from '@c/Interview/NavFooter'
 import { Filter }          from '@i/InterviewIcons'
 import type { RootState }  from '@r/store'
 
-const InterviewsTable = ({ token }: any) => {
+const InterviewsTable = ({ token }: any) : React.JSX.Element => {
   // Redux store
   const data : any = useSelector((state: RootState) => state.InterviewsData.interviews)
 

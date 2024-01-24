@@ -1,6 +1,6 @@
 import React from 'react'
 
-const index = () => {
+const index = () : React.JSX.Element => {
   return (
     <>
       Super User Login

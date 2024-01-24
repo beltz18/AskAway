@@ -16,7 +16,7 @@ import {
   Check,
 } from '@i/ModalIcons'
 
-const Stepper = () => {
+const Stepper = () : React.JSX.Element => {
   const dispatch   = useDispatch()
   const step : any = useSelector((state: RootState) => state.Step.step)
   

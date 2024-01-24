@@ -25,7 +25,7 @@ const BodyInterviewsTable = ({
   stepMenu,
   setStepMenu,
   token,
-}: any) => {
+}: any) : React.JSX.Element => {
   // Dispatcher
   const dispatcher   : any = useDispatch()
   // Alerts

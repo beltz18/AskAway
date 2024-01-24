@@ -1,16 +1,15 @@
 import { useEffect } from 'react'
-import { useRef }      from 'react'
-import { useState }    from 'react'
-import uuid4           from 'uuid4'
-import Webcam          from 'react-webcam'
+import { useRef }    from 'react'
+import { useState }  from 'react'
+import Link          from 'next/link'
+import Webcam        from 'react-webcam'
 import {
   Record,
   Stop,
 } from '@i/TakeTheInterviewIcons'
 
-const BodyPractice = () => {
+const BodyPractice = ({ user, interview }: any) : React.JSX.Element => {
   const [chunks, setChunks] : any = useState([])
-  const [videoR, setVideoR] : any = useState(null)
   const [record, setRecord] : any = useState(false)
   const [readyP, setReadyP] : any = useState(true)
 
@@ -27,13 +26,8 @@ const BodyPractice = () => {
   const startStream = () => {
     setReadyP(true)
     setRecord(true)
-    mediaRecorder.current = new MediaRecorder(webCamVideoRef?.current?.stream, {
-      mimeType: "video/mp4",
-    })
-    mediaRecorder.current.addEventListener(
-      "dataavailable",
-      handleData,
-    )
+    mediaRecorder.current = new MediaRecorder(webCamVideoRef?.current?.stream)
+    mediaRecorder.current.addEventListener("dataavailable", handleData)
     mediaRecorder.current.start()
   }
 
@@ -52,14 +46,6 @@ const BodyPractice = () => {
     const mp4 : any = document?.querySelector('#videoRecorded')
     mp4.src = url
     mp4.play()
-    // const mp4 : any = document.createElement("a")
-    // document.body.appendChild(mp4)
-    // mp4.style = "display: none"
-    // mp4.href  = url
-    // mp4.download = `askaway-${ uuid4() }.mp4`
-    // mp4.click()
-    // window.URL.revokeObjectURL(url)
-    // console.log(chunks)
     setChunks([])
   }
 
@@ -74,8 +60,8 @@ const BodyPractice = () => {
           </div>
         </div>
 
-        <div className='absolute left-0 w-full h-[90vh] flex items-center justify-center mt-6'>
-          <div className='w-[90%] md:w-[40%] bg-white p-2 shadow-2xl rounded-lg'>
+        <div className='absolute left-0 w-full h-[90vh] flex flex-col items-center justify-center gap-6 mt-6'>
+          <div className='w-[90%] md:w-[40%] flex flex-col bg-white p-2 shadow-2xl rounded-lg'>
             {
               !readyP
                 ?
@@ -85,7 +71,7 @@ const BodyPractice = () => {
                   autoPlay
                   controls
                   preload='auto'
-                  className='w-full h-[75%] rounded-lg bg-black'
+                  className='w-full rounded-lg bg-black'
                   data-setup='{}'
                 />
               )
@@ -98,7 +84,7 @@ const BodyPractice = () => {
                 />
               )
             }
-            <div className='p-5 h-[25%] flex gap-6 items-center justify-center'>
+            <div className='p-2 h-[25%] flex gap-6 items-center justify-center'>
               <button
                 className='bg-[#D9D9D961] w-[100px] px-3 py-2 rounded-md flex flex-col items-center justify-center'
                 onClick={ startStream }
@@ -116,6 +102,15 @@ const BodyPractice = () => {
                 Stop
               </button>
             </div>
+          </div>
+
+          <div className='w-[90%] md:w-[40%] flex items-center justify-center bg-white p-4 shadow-2xl rounded-lg'>
+            <Link
+              href={`/interviews/${interview}/${user}/?step=1`}
+              className='py-2 px-10 text-white bg-[#14C4CF] rounded-md cursor-pointer'
+            >
+              Start Interview
+            </Link>
           </div>
         </div>
       </div>

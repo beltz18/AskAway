@@ -7,7 +7,7 @@ import FormQuestions      from '@c/Interview/FormQuestions'
 import type { RootState } from '@r/store'
 
 
-const Modal = ({ setOpenModal, token }: any) => {
+const Modal = ({ setOpenModal, token }: any) : React.JSX.Element => {
   const step : any = useSelector((state: RootState) => state.Step.step)
 
   return (

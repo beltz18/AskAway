@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Questions = ({ questions }: any) => {
+const Questions = ({ questions }: any) : React.JSX.Element => {
   let totalTime = 0
   questions?.map((q: any) => totalTime += parseInt(q?.time))
 

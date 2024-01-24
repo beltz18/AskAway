@@ -1,6 +1,6 @@
 import React from 'react'
 
-const JobManager = () => {
+const JobManager = () : React.JSX.Element => {
   return (
     <>
       <div className='flex flex-col m-auto bg-white shadow-md rounded-md max-w-[1200px] mt-12'>

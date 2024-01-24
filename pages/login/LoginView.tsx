@@ -14,7 +14,7 @@ import Sullivan         from '@i/Sullivan'
 import { SaveUserData } from '@r/slicers/AuthSlicer'
 import { loginInfo }    from "@t/common"
 
-const LoginView = () => {
+const LoginView = () : React.JSX.Element => {
   // Router
   const { push } = useRouter()
   

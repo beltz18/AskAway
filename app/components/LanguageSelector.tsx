@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { Language } from '@a/global'
 
-const LanguageSelector = () => {
+const LanguageSelector = () : React.JSX.Element => {
   const setLanguage = (lang: string) => {
     console.log(lang)
   }

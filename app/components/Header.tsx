@@ -9,7 +9,7 @@ import PowerOff           from '@i/PowerOff'
 import type { RootState } from '@r/store'
 import { Page }           from '@t/common'
 
-const Header = ({ name }: Page) => {
+const Header = ({ name }: Page) : React.JSX.Element => {
   const user : any = useSelector((state: RootState) => state.UserData)
 
   return (

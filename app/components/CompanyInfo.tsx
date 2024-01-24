@@ -3,7 +3,7 @@ import Image              from 'next/image'
 import { useSelector }    from 'react-redux'
 import type { RootState } from '@r/store'
 
-const CompanyInfo = () => {
+const CompanyInfo = () : React.JSX.Element => {
   const userData : any = useSelector((state: RootState) => state.UserData)
 
   return (

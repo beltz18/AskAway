@@ -3,7 +3,7 @@ import MyHead        from '@c/MyHead'
 import LoginView     from './LoginView'
 import { getCookie } from '@a/functions'
 
-const Login = () => {
+const Login = () : React.JSX.Element => {
   return (
     <>
       <MyHead title="AskAway - Login" />

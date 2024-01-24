@@ -1,6 +1,6 @@
 import React from 'react'
 
-const InterviewsHeader = ({ c }: any) => {
+const InterviewsHeader = ({ c }: any) : React.JSX.Element => {
   return (
     <>
       <div className='flex justify-between items-center m-auto bg-white shadow-md rounded-md max-w-[1200px] p-6'>

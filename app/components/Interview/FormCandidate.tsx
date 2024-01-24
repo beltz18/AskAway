@@ -5,7 +5,7 @@ import { SetStep }         from '@r/slicers/StepperSlicer'
 import { AddNewCandidate } from '@r/slicers/CandidatesSlicer'
 import type { RootState }  from '@r/store'
 
-const FormCandidate = () => {
+const FormCandidate = () : React.JSX.Element => {
   const [fname, setFname] = useState('')
   const [lname, setLname] = useState('')
   const [email, setEmail] = useState('')
