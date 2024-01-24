@@ -21,6 +21,7 @@ const BodyPractice = () => {
     width: 720,
     height: 576,
     facingMode: "user",
+    encoder: 'x264',
   }
 
   const startStream = () => {
@@ -44,19 +45,21 @@ const BodyPractice = () => {
     setReadyP(false)
   }
 
-  useEffect(() => {
-    if (chunks?.size) downloadVideo()
-  }, [chunks])
+  useEffect(() => { if (chunks?.size) HandlePlayVideo() }, [chunks])
 
-  const downloadVideo = () => {
+  const HandlePlayVideo = () => {
     const url : any = URL.createObjectURL(chunks)
-    const mp4 : any = document.createElement("a")
-    document.body.appendChild(mp4)
-    mp4.style = "display: none"
-    mp4.href  = url
-    mp4.download = `askaway-${ uuid4() }.webm`
-    mp4.click()
-    window.URL.revokeObjectURL(url)
+    const mp4 : any = document?.querySelector('#videoRecorded')
+    mp4.src = url
+    mp4.play()
+    // const mp4 : any = document.createElement("a")
+    // document.body.appendChild(mp4)
+    // mp4.style = "display: none"
+    // mp4.href  = url
+    // mp4.download = `askaway-${ uuid4() }.mp4`
+    // mp4.click()
+    // window.URL.revokeObjectURL(url)
+    // console.log(chunks)
     setChunks([])
   }
 
@@ -78,11 +81,12 @@ const BodyPractice = () => {
                 ?
               (
                 <video
-                  src={ videoR }
-                  ref={ mediaRecorder }
+                  id='videoRecorded'
                   autoPlay
                   controls
+                  preload='auto'
                   className='w-full h-[75%] rounded-lg bg-black'
+                  data-setup='{}'
                 />
               )
                 :
