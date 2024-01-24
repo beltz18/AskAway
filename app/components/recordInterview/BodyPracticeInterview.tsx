@@ -28,7 +28,7 @@ const BodyPractice = () => {
     setReadyP(true)
     setRecord(true)
     mediaRecorder.current = new MediaRecorder(webCamVideoRef?.current?.stream, {
-      mimeType: "video/webm",
+      mimeType: "video/mp4",
     })
     mediaRecorder.current.addEventListener(
       "dataavailable",
