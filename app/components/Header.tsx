@@ -1,4 +1,5 @@
-import React, { Children, useState }              from 'react'
+import React              from 'react'
+import { useState } from 'react'
 import Image              from 'next/image'
 import Link               from 'next/link'
 import { useSelector }    from 'react-redux'
@@ -12,6 +13,7 @@ import { MenuIcon } from './icons/MenuIcon'
 import Menu from './Menu'
 
 const Header = ({ name }: Page) => {
+
   const user : any = useSelector((state: RootState) => state.UserData)
 
   const [toggle, setToggle] : any = useState(false)
@@ -23,8 +25,7 @@ const Header = ({ name }: Page) => {
   return (
     <> 
       {toggle && (<Menu 
-          name={name}
-          
+          name={name} 
         />)}
 
       <div className='bg-primary px-[5%] w-full h-[70px] flex justify-between items-center'>

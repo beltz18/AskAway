@@ -39,7 +39,7 @@ const NavFooter = ({ pages, current }: any) => {
           Showing page: <span className="bg-gray-200 px-2 rounded-sm ml-3"><b className='text-primary'>{ current }</b> of { pages }</span>
         </span>
 
-        <ul className="inline-flex -space-x-px text-sm h-8 w-full">
+        <ul className="inline-flex -space-x-px text-sm h-8 justify-between">
           <li>
             <button
               type='button'

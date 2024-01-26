@@ -187,10 +187,10 @@ const FormQuestions = ({ token, setOpenModal }: any) => {
 
         <div className='w-full my-6'>          
           <div className='p-3 bg-slate-100 max-h-[25vh] overflow-y-auto'>
-            <div className='mt-1 py-1 w-full flex items-center justify-between border-b-2'>
+            <div className='mt-1 py-1 w-full flex justify-between items-center border-b-2'>
               <h4 className='font-bold text-sm'>Questions</h4>
               
-              <div className='flex items-center gap-16'>
+              <div className=' px-4 flex items-center gap-12 max-sm:gap-8'>
                 <h4 className='font-bold text-sm'>Time</h4>
                 <h4 className='font-bold text-sm'>Action</h4>
               </div>
@@ -200,15 +200,13 @@ const FormQuestions = ({ token, setOpenModal }: any) => {
               questions.map((q: any, index: number) => (
                 <div
                   key={ index }
-                  className='mt-1 py-1 w-full flex items-center justify-between border-b-2'
+                  className='mt-1 py-1 w-full flex items-center justify-between border-b-2 gap-4'
                 >
-                  <h6 className='text-slate-600 font-semibold text-sm'>{ q.question }</h6>
-            
-                  <div className='flex items-center gap-16'>
+                  <div>
+                    <h6 className='text-slate-600 font-semibold text-sm'>{ q.question }</h6>
+                  </div>
+                  <div className='px-4 py-4 flex items-center justify-center gap-4 max-sm:px-0'>
                     <h6 className='text-slate-600 font-semibold text-sm'>0{ q.timeMins }:{ parseInt(q.timeSecs) == 0 ? `0${q.timeSecs}` : q.timeSecs }m</h6>
-                    <div
-                      className='px-6 py-4 flex items-center justify-center gap-2'
-                    >
                       <span className='bg-[#E3F1EB] rounded-md cursor-pointer'
                       //Aca va la funcion de editQuestion
                       >
@@ -220,7 +218,6 @@ const FormQuestions = ({ token, setOpenModal }: any) => {
                       <Trash />
                       </span>
                     </div>
-                  </div>
                 </div>
               ))
             }

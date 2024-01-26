@@ -79,7 +79,7 @@ const LoginView = () => {
               <input
                 type="email"
                 placeholder='Email'
-                className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-lg px-4 py-2 w-full'
+                className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-lg px-4 py-2 w-full'
                 onChange={(e) => setEmail(e.target.value)}
                 onBlur={() => {
                   if (email)
@@ -90,7 +90,7 @@ const LoginView = () => {
               <input
                 type="password"
                 placeholder='Password'
-                className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-lg px-4 py-2 w-full'
+                className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-lg px-4 py-2 w-full'
                 onChange={(e) => setPassw(e.target.value)}
               />
             </div>
