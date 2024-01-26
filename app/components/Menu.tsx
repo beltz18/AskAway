@@ -12,7 +12,7 @@ const Menu =  ({ name }: Page) => {
     
     return (
         <>
-            <div className='bg-primary px-[5%] w-[60%] h-[100%] flex flex-col absolute z-0'>
+            <div className='bg-primary px-[5%] w-[60%] h-[100%] flex flex-col absolute z-10'>
                 <div className='py-[10%] px-[5%] flex flex-left'>
                     <BackIcon />
                 </div>

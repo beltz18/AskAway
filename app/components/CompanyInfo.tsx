@@ -120,7 +120,7 @@ const CompanyInfo = () => {
             </div>
           </div>
 
-          <div className='w-[50%] flex items-center justify-center max-sm:w-[100%] order-1'>
+          <div className='w-[50%] flex items-center justify-center max-sm:w-[100%]'>
             <div className='bg-gray-100 border-2 border-gray-400 border-dashed rounded-lg w-[80%] flex flex-col items-center justify-center py-8 max-sm:w-[100%]'>
               <Image
                 src='/assets/vector.png'
@@ -202,7 +202,7 @@ const CompanyInfo = () => {
           </div>
         </div>
 
-        <div className='pb-6 flex items-center justify-center order-2'>
+        <div className='pb-6 flex items-center justify-center'>
           <input
             type="button"
             className='bg-[#214F71] text-white font-bold px-4 py-[2px] rounded-md h-[40px] cursor-pointer'
