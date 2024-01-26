@@ -26,9 +26,25 @@ const BodyPractice = ({ user, interview }: any) : React.JSX.Element => {
   const startStream = () => {
     setReadyP(true)
     setRecord(true)
-    mediaRecorder.current = new MediaRecorder(webCamVideoRef?.current?.stream)
-    mediaRecorder.current.addEventListener("dataavailable", handleData)
-    mediaRecorder.current.start()
+
+    navigator.mediaDevices.getUserMedia(
+      {
+        video: true,
+        audio: { echoCancellation: false },
+      }
+    )
+      .then((stream) => {
+        webCamVideoRef.current.srcObject = stream
+        webCamVideoRef.current.muted = true
+
+        mediaRecorder.current = new MediaRecorder(stream, {
+          audioBitsPerSecond: 128000,
+          videoBitsPerSecond: 2500000,
+        })
+        mediaRecorder.current.addEventListener("dataavailable", handleData)
+        mediaRecorder.current.start()
+      })
+      .catch((err) => console.log(err))
   }
 
   const handleData = ({ data }: any) => setChunks(data)
@@ -78,7 +94,7 @@ const BodyPractice = ({ user, interview }: any) : React.JSX.Element => {
                 :
               (
                 <Webcam
-                  audio={ true }
+                  mirrored={ true }
                   ref={ webCamVideoRef }
                   videoConstraints={ videoConstraints }
                 />
