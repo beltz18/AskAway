@@ -8,15 +8,15 @@ const CompanyInfo = () : React.JSX.Element => {
 
   return (
     <>
-      <div className='flex flex-col m-auto bg-white shadow-md rounded-md max-w-[1200px]'>
+      <div className='flex flex-col m-auto bg-white shadow-md rounded-md max-w-[1200px] max-sm:flex-col'>
         <div className='shadow-md flex items-center justify-center py-6'>
           <h2 className='text-[#009EA8] font-bold text-2xl'>Company Information</h2>
         </div>
         
-        <div className='py-12 px-12 flex gap-12'>
-          <div className='w-[50%] flex flex-col justify-between'>
-            <div className='flex gap-6'>
-              <div className='flex flex-col gap-1 w-[50%]'>
+        <div className='py-12 px-12 flex gap-12 max-sm:flex-col'>
+          <div className='w-[50%] flex flex-col justify-between max-sm:flex-col max-sm:w-[100%] max-sm:gap-2.5'>
+            <div className='flex gap-6 max-sm:flex-col max-sm:gap-2.5'>
+              <div className='flex flex-col gap-1 w-[50%] max-sm:w-[100%]'>
                 <label
                   htmlFor="name"
                   className='text-[#818181]'
@@ -27,12 +27,12 @@ const CompanyInfo = () : React.JSX.Element => {
                   type="text"
                   id='name'
                   placeholder='First Name'
-                  className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+                  className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-md px-3 w-full h-[45px]'
                   defaultValue={ userData?.first_name }
                 />
               </div>
 
-              <div className='flex flex-col gap-1 w-[50%]'>
+              <div className='flex flex-col gap-1 w-[50%] max-sm:w-[100%] '>
                 <label
                   htmlFor="lastName"
                   className='text-[#818181]'
@@ -43,14 +43,14 @@ const CompanyInfo = () : React.JSX.Element => {
                   type="text"
                   id='lastName'
                   placeholder='Last Name'
-                  className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+                  className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-md px-3 w-full h-[45px]'
                   defaultValue={ userData['last-name'] }
                 />
               </div>
             </div>
 
-            <div className='flex gap-6'>
-              <div className='flex flex-col gap-1  w-[50%]'>
+            <div className='flex gap-6 max-sm:flex-col max-sm:gap-2.5'>
+              <div className='flex flex-col gap-1  w-[50%] max-sm:w-[100%]'>
                 <label
                   htmlFor="companyName"
                   className='text-[#818181]'
@@ -61,12 +61,12 @@ const CompanyInfo = () : React.JSX.Element => {
                   type="text"
                   id='companyName'
                   placeholder='Company Name'
-                  className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+                  className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-md px-3 w-full h-[45px]'
                   defaultValue={ userData?.company_name }
                 />
               </div>
 
-              <div className='flex flex-col gap-1 w-[50%]'>
+              <div className='flex flex-col gap-1 w-[50%] max-sm:w-[100%]'>
                 <label
                   htmlFor="email"
                   className='text-[#818181]'
@@ -77,14 +77,14 @@ const CompanyInfo = () : React.JSX.Element => {
                   type="text"
                   id='email'
                   placeholder='Email'
-                  className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+                  className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-md px-3 w-full h-[45px]'
                   defaultValue={ userData?.email }
                 />
               </div>
             </div>
 
-            <div className='flex gap-6'>
-              <div className='flex flex-col gap-1 w-[50%]'>
+            <div className='flex gap-6 max-sm:flex-col max-sm:gap-2.5'>
+              <div className='flex flex-col gap-1 w-[50%] max-sm:w-[100%]'>
                 <label
                   htmlFor="country"
                   className='text-[#818181]'
@@ -93,7 +93,7 @@ const CompanyInfo = () : React.JSX.Element => {
                 </label>
                 <select
                   id='country'
-                  className='bg-[#FAFAFA] border-2 rounded-md px-3 w-full h-[45px]'
+                  className='bg-[#FAFAFA] border-1 rounded-md px-3 w-full h-[45px]'
                   defaultValue={ userData?.country }
                 >
                   <option value="---">Country</option>
@@ -101,7 +101,7 @@ const CompanyInfo = () : React.JSX.Element => {
                 </select>
               </div>
 
-              <div className='flex flex-col gap-1 w-[50%]'>
+              <div className='flex flex-col gap-1 w-[50%] max-sm:w-[100%]'>
                 <label
                   htmlFor="state"
                   className='text-[#818181]'
@@ -110,7 +110,7 @@ const CompanyInfo = () : React.JSX.Element => {
                 </label>
                 <select
                   id='state'
-                  className='bg-[#FAFAFA] border-2 rounded-md px-3 w-full h-[45px]'
+                  className='bg-[#FAFAFA] border-1 rounded-md px-3 w-full h-[45px]'
                   defaultValue={ userData?.state }
                 >
                   <option value="---">State</option>
@@ -120,8 +120,8 @@ const CompanyInfo = () : React.JSX.Element => {
             </div>
           </div>
 
-          <div className='w-[50%] flex items-center justify-center'>
-            <div className='bg-gray-100 border-2 border-gray-400 border-dashed rounded-lg w-[80%] flex flex-col items-center justify-center py-8'>
+          <div className='w-[50%] flex items-center justify-center max-sm:w-[100%]'>
+            <div className='bg-gray-100 border-2 border-gray-400 border-dashed rounded-lg w-[80%] flex flex-col items-center justify-center py-8 max-sm:w-[100%]'>
               <Image
                 src='/assets/vector.png'
                 alt='image'
@@ -136,8 +136,8 @@ const CompanyInfo = () : React.JSX.Element => {
           </div>
         </div>
 
-        <div className='pb-12 px-12 flex gap-6'>
-          <div className='flex flex-col gap-1 w-[25%]'>
+        <div className='pb-12 px-12 flex gap-6 max-sm:flex-col max-sm:gap-2.5'>
+          <div className='flex flex-col gap-1 w-[25%] max-sm:w-[100%]'>
             <label
               htmlFor="companyAddress"
               className='text-[#818181]'
@@ -148,12 +148,12 @@ const CompanyInfo = () : React.JSX.Element => {
               type="text"
               id='companyAddress'
               placeholder='Company Address'
-              className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+              className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-md px-3 w-full h-[45px]'
               defaultValue={ userData?.address }
             />
           </div>
           
-          <div className='flex flex-col gap-1 w-[25%]'>
+          <div className='flex flex-col gap-1 w-[25%] max-sm:w-[100%]'>
             <label
               htmlFor="companyAddress2"
               className='text-[#818181]'
@@ -164,12 +164,12 @@ const CompanyInfo = () : React.JSX.Element => {
               type="text"
               id='companyAddress2'
               placeholder='Company Address 2'
-              className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+              className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-md px-3 w-full h-[45px]'
               defaultValue={ userData?.address2 }
             />
           </div>
 
-          <div className='flex flex-col gap-1 w-[25%]'>
+          <div className='flex flex-col gap-1 w-[25%] max-sm:w-[100%]'>
             <label
               htmlFor="companyCity"
               className='text-[#818181]'
@@ -180,12 +180,12 @@ const CompanyInfo = () : React.JSX.Element => {
               type="text"
               id='companyCity'
               placeholder='Company City'
-              className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+              className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-md px-3 w-full h-[45px]'
               defaultValue={ userData?.city }
             />
           </div>
           
-          <div className='flex flex-col gap-1 w-[25%]'>
+          <div className='flex flex-col gap-1 w-[25%] max-sm:w-[100%]'>
             <label
               htmlFor="companyZip"
               className='text-[#818181]'
@@ -196,7 +196,7 @@ const CompanyInfo = () : React.JSX.Element => {
               type="text"
               id='companyZip'
               placeholder='Company Zip'
-              className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-md px-3 w-full h-[45px]'
+              className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-md px-3 w-full h-[45px]'
               defaultValue={ userData?.zip }
             />
           </div>

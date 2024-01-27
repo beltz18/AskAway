@@ -49,22 +49,22 @@ const SignUp = () : React.JSX.Element => {
               <input
                 type="text"
                 placeholder='First Name'
-                className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-lg px-4 py-2 w-full'
+                className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-lg px-4 py-2 w-full'
               />
               <input
                 type="text"
                 placeholder='Last Name'
-                className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-lg px-4 py-2 w-full'
+                className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-lg px-4 py-2 w-full'
               />
               <input
                 type="email"
                 placeholder='Company Email'
-                className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-lg px-4 py-2 w-full'
+                className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-lg px-4 py-2 w-full'
               />
               <input
                 type="password"
                 placeholder='Password'
-                className='bg-[#FAFAFA] color-[#B6B6B6] border-2 rounded-lg px-4 py-2 w-full'
+                className='bg-[#FAFAFA] color-[#B6B6B6] border-1 rounded-lg px-4 py-2 w-full'
               />
             </div>
             

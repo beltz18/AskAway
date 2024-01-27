@@ -12,6 +12,7 @@ const BodyPractice = ({ user, interview }: any) : React.JSX.Element => {
   const [chunks, setChunks] : any = useState([])
   const [record, setRecord] : any = useState(false)
   const [readyP, setReadyP] : any = useState(true)
+  const [countS, setCountS] : any = useState(30)
 
   const webCamVideoRef : any = useRef(null)
   const mediaRecorder  : any = useRef(null)
@@ -56,6 +57,15 @@ const BodyPractice = ({ user, interview }: any) : React.JSX.Element => {
   }
 
   useEffect(() => { if (chunks?.size) HandlePlayVideo() }, [chunks])
+  useEffect(() => {
+    let interval : any
+
+    if (record && countS > 0) {
+      interval = setInterval(() => setCountS((secs: number = 0) => secs - 1), 1000)
+    } else clearInterval(interval)
+
+    return () => clearInterval(interval)
+  }, [record])
 
   const HandlePlayVideo = () => {
     const url : any = URL.createObjectURL(chunks)
@@ -63,6 +73,15 @@ const BodyPractice = ({ user, interview }: any) : React.JSX.Element => {
     mp4.src = url
     mp4.play()
     setChunks([])
+  }
+
+  const handleFormatTime = (secs: number) => {
+    if (secs < 10 && secs > 0) return `0:0${secs}`
+    else if (secs > 9   && secs <= 30)  return `0:${secs}`
+    else if (secs == 0) {
+      stopStream()
+      setCountS(30)
+    }
   }
 
   return (
@@ -109,6 +128,14 @@ const BodyPractice = ({ user, interview }: any) : React.JSX.Element => {
                 <Record color={ !record ? '#EA830A' : '#525252' } />
                 Record
               </button>
+              {
+                countS < 30 && countS >= 0 && (
+                  <div className='flex flex-col items-center justify-between'>
+                    Recording
+                    <span>{ handleFormatTime(countS) }</span>
+                  </div>
+                )
+              }
               <button
                 className='bg-[#D9D9D961] w-[100px] px-3 py-2 rounded-md flex flex-col items-center justify-center'
                 onClick={ stopStream }
@@ -122,7 +149,7 @@ const BodyPractice = ({ user, interview }: any) : React.JSX.Element => {
 
           <div className='w-[90%] md:w-[40%] flex items-center justify-center bg-white p-4 shadow-2xl rounded-lg'>
             <Link
-              href={`/interviews/${interview}/${user}/?step=1`}
+              href={`/interviews/${interview}/${user}/?start=1`}
               className='py-2 px-10 text-white bg-[#14C4CF] rounded-md cursor-pointer'
             >
               Start Interview

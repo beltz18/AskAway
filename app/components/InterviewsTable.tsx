@@ -42,7 +42,7 @@ const InterviewsTable = ({ token }: any) : React.JSX.Element => {
   return (
     <>
       <div className='mt-12 max-w-[1200px] m-auto'>
-        <div className='my-12 flex items-center justify-between'>
+        <div className='my-12 flex items-center justify-between gap-6 max-sm:flex-col'>
           <span
             className='bg-[#214F71] text-white py-[6px] px-6 rounded-md cursor-pointer'
             onClick={() => setOpenModal(true)}
@@ -69,7 +69,7 @@ const InterviewsTable = ({ token }: any) : React.JSX.Element => {
               <span className={`${ redMonth ? 'text-red-600' : 'text-[#F5F6FA]' }`}>Incorrect value</span>
               <input
                 type="number"
-                className="py-2 px-3 border-2 rounded-md"
+                className="py-2 px-3 border-1 rounded-md max-sm:h-8"
                 min='1'
                 max='12'
                 placeholder='Month'
@@ -82,7 +82,7 @@ const InterviewsTable = ({ token }: any) : React.JSX.Element => {
               <span className={`${ redYear ? 'text-red-600' : 'text-[#F5F6FA]' }`}>Incorrect value</span>
               <input
                 type="number"
-                className='py-2 px-3 border-2 rounded-md'
+                className='py-2 px-3 border-1 rounded-md max-sm:h-8'
                 min='2022'
                 max={ new Date().getFullYear() }
                 placeholder='Year'
@@ -95,7 +95,7 @@ const InterviewsTable = ({ token }: any) : React.JSX.Element => {
 
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-500">
-            <thead className="text-xs bg-white shadow-md uppercase">
+            <thead className="text-base bg-white shadow-md">
               <tr className='text-center'>
                 {
                   options.map((option, index) =>
@@ -130,7 +130,6 @@ const InterviewsTable = ({ token }: any) : React.JSX.Element => {
               }
             </tbody>
           </table>
-
           <NavFooter
             pages={ 1 }
             current={ 1 }
