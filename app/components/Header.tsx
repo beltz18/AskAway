@@ -12,25 +12,16 @@ import { Page }           from '@t/common'
 import { MenuIcon } from './icons/MenuIcon'
 import Menu from './Menu'
 
-<<<<<<< HEAD
 const Header = ({ name }: Page) : React.JSX.Element => {
-=======
-const Header = ({ name }: Page) => {
-
->>>>>>> 9f0f1883ca20d62b0adf783d43e983394a41855a
   const user : any = useSelector((state: RootState) => state.UserData)
 
   const [toggle, setToggle] : any = useState(false)
 
-  const handleToggle = () =>{
-    setToggle(!toggle);
-  };
+  const handleToggle = () => setToggle(!toggle)
 
   return (
     <> 
-      {toggle && (<Menu 
-          name={name} 
-        />)}
+      { toggle && (<Menu name={name} />) }
 
       <div className='bg-primary px-[5%] w-full h-[70px] flex justify-between items-center'>
 

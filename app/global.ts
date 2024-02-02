@@ -36,6 +36,13 @@ export const Language = {
   'english': 'en',
 }
 
+export const videoConst = {
+  width: 720,
+  height: 576,
+  facingMode: "user",
+  encoder: 'x264',
+}
+
 export const stepCheckedCss   : string = 'flex w-full items-center text-blue-600 after:w-full after:h-1 after:border-b after:border-blue-100 after:border-4 after:inline-block dark:after:border-blue-800 cursor-pointer'
 export const stepUncheckedCss : string = 'flex w-full items-center text-gray-500 after:w-full after:h-1 after:border-b after:border-gray-100 after:border-4 after:inline-block dark:after:border-gray-700 cursor-pointer'
 

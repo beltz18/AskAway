@@ -115,6 +115,14 @@ const reorderManagerData = (userData: any) => {
   }
 }
 
+// Manage the time as a chronometer
+const handleFormatTime = (number: number) : string => {
+  const minutes : number = Math.floor(number / 60)
+  const seconds : number = number % 60
+  const paddedN : string = seconds.toString().padStart(2, '0')
+  return `0${minutes}:${paddedN}`
+}
+
 export {
   setCookie,
   getCookie,
@@ -123,4 +131,5 @@ export {
   reorderCandidateData,
   reorderPanelData,
   reorderManagerData,
+  handleFormatTime,
 }

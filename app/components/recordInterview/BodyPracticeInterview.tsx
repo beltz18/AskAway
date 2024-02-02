@@ -1,12 +1,18 @@
-import { useEffect } from 'react'
-import { useRef }    from 'react'
-import { useState }  from 'react'
-import Link          from 'next/link'
-import Webcam        from 'react-webcam'
+import { useEffect }  from 'react'
+import { useRef }     from 'react'
+import { useState }   from 'react'
+import Link           from 'next/link'
+import Webcam         from 'react-webcam'
+import { toast }      from 'react-toastify'
+import Background     from './Background'
+import { videoConst } from '@a/global'
 import {
   Record,
   Stop,
 } from '@i/TakeTheInterviewIcons'
+import {
+  handleFormatTime,
+} from '@a/functions'
 
 const BodyPractice = ({ user, interview }: any) : React.JSX.Element => {
   const [chunks, setChunks] : any = useState([])
@@ -17,35 +23,31 @@ const BodyPractice = ({ user, interview }: any) : React.JSX.Element => {
   const webCamVideoRef : any = useRef(null)
   const mediaRecorder  : any = useRef(null)
 
-  const videoConstraints = {
-    width: 720,
-    height: 576,
-    facingMode: "user",
-    encoder: 'x264',
-  }
-
   const startStream = () => {
-    setReadyP(true)
-    setRecord(true)
+    if (countS == 0) toast.error('You can only record 30 seconds as practice')
+    else {
+      setReadyP(true)
+      setRecord(true)
 
-    navigator.mediaDevices.getUserMedia(
-      {
-        video: true,
-        audio: { echoCancellation: false },
-      }
-    )
-      .then((stream) => {
-        webCamVideoRef.current.srcObject = stream
-        webCamVideoRef.current.muted = true
+      navigator.mediaDevices.getUserMedia(
+        {
+          video: true,
+          audio: { echoCancellation: false },
+        }
+      )
+        .then((stream) => {
+          webCamVideoRef.current.srcObject = stream
+          webCamVideoRef.current.muted = true
 
-        mediaRecorder.current = new MediaRecorder(stream, {
-          audioBitsPerSecond: 128000,
-          videoBitsPerSecond: 2500000,
+          mediaRecorder.current = new MediaRecorder(stream, {
+            audioBitsPerSecond: 128000,
+            videoBitsPerSecond: 2500000,
+          })
+          mediaRecorder.current.addEventListener("dataavailable", handleData)
+          mediaRecorder.current.start()
         })
-        mediaRecorder.current.addEventListener("dataavailable", handleData)
-        mediaRecorder.current.start()
-      })
-      .catch((err) => console.log(err))
+        .catch((err) => console.log(err))
+    }
   }
 
   const handleData = ({ data }: any) => setChunks(data)
@@ -56,17 +58,6 @@ const BodyPractice = ({ user, interview }: any) : React.JSX.Element => {
     setReadyP(false)
   }
 
-  useEffect(() => { if (chunks?.size) HandlePlayVideo() }, [chunks])
-  useEffect(() => {
-    let interval : any
-
-    if (record && countS > 0) {
-      interval = setInterval(() => setCountS((secs: number = 0) => secs - 1), 1000)
-    } else clearInterval(interval)
-
-    return () => clearInterval(interval)
-  }, [record])
-
   const HandlePlayVideo = () => {
     const url : any = URL.createObjectURL(chunks)
     const mp4 : any = document?.querySelector('#videoRecorded')
@@ -75,25 +66,34 @@ const BodyPractice = ({ user, interview }: any) : React.JSX.Element => {
     setChunks([])
   }
 
-  const handleFormatTime = (secs: number) => {
-    if (secs < 10 && secs > 0) return `0:0${secs}`
-    else if (secs > 9   && secs <= 30)  return `0:${secs}`
-    else if (secs == 0) {
-      stopStream()
-      setCountS(30)
-    }
-  }
+  useEffect(() => { if (chunks?.size) HandlePlayVideo() }, [chunks])
+  useEffect(() => {
+    let interval : any
+
+    if (record && countS > 0) {
+      interval = setInterval(() => setCountS((secs: number = 0) => secs - 1), 1000)
+    } else clearInterval(interval)
+    
+    record && countS == 0 && stopStream()
+    return () => clearInterval(interval)
+      
+  }, [record, countS])
+
+  // useEffect(() => {
+  //   if (document) {
+  //     document.onkeydown     = (e) => { if (e.keyCode == 123) e.preventDefault() }
+  //     document.oncontextmenu = (e) => { if (e.button == 2)    e.preventDefault() }
+  //   }
+  // }, [])
 
   return (
     <>
       <div className="w-full h-full flex flex-col relative">
-        <div className='bg-[#14C4CF] h-[45vh] w-full'>
-          <div className='flex items-center justify-between px-3 pt-2'>
-            <span className='text-[#14C4CF]'>|</span>
-            <h4 className='text-[#018F9A] font-bold text-lg'>Prepare your equipement</h4>
-            <h4 className='text-[#0396A1]'><b>2</b> / 2</h4>
-          </div>
-        </div>
+        <Background
+          message={'Prepare your equipement'}
+          current={ 2 }
+          length={ 2 }
+        />
 
         <div className='absolute left-0 w-full h-[90vh] flex flex-col items-center justify-center gap-6 mt-6'>
           <div className='w-[90%] md:w-[40%] flex flex-col bg-white p-2 shadow-2xl rounded-lg'>
@@ -115,7 +115,7 @@ const BodyPractice = ({ user, interview }: any) : React.JSX.Element => {
                 <Webcam
                   mirrored={ true }
                   ref={ webCamVideoRef }
-                  videoConstraints={ videoConstraints }
+                  videoConstraints={ videoConst }
                 />
               )
             }

@@ -1,4 +1,4 @@
-export function Clip() {
+export function Clip () {
   return (
     <>
       <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" transform="rotate(180)">
@@ -12,7 +12,7 @@ export function Clip() {
   )
 }
 
-export function ArrowDown() {
+export function ArrowDown () {
   return (
     <>
       <svg width="40px" height="40px" viewBox="0 0 24 24" transform='rotate(90)'>
@@ -26,7 +26,7 @@ export function ArrowDown() {
   )
 }
 
-export function ArrowRight() {
+export function ArrowRight () {
   return (
     <>
       <svg width="40px" height="40px" viewBox="0 0 24 24">
@@ -40,7 +40,7 @@ export function ArrowRight() {
   )
 }
 
-export function Edit() {
+export function Edit () {
   return (
     <>
       <svg width="30px" height="30px" viewBox="0 -0.5 25 25" fill="none" stroke="#6E9382" className='cursor-pointer'>
@@ -54,7 +54,7 @@ export function Edit() {
   )
 }
 
-export function Filter() {
+export function Filter () {
   return (
     <>
       <svg width='25px' height='25px' viewBox="0 0 24 24" fill="none" stroke="#4BB7BE">
@@ -68,7 +68,7 @@ export function Filter() {
   )
 }
 
-export function Trash() {
+export function Trash () {
   return (
     <>
       <svg width="30px" height="30px" viewBox="-2.4 -2.4 28.80 28.80" fill="none" className='cursor-pointer'>
