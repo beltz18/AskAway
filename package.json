@@ -26,6 +26,7 @@
     "video.js": "^8.10.0"
   },
   "devDependencies": {
+    "@types/handbrake-js": "^5.0.4",
     "@types/js-cookie": "^3.0.6",
     "@types/md5": "^2.3.5",
     "@types/node": "^20",

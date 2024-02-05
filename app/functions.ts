@@ -123,6 +123,27 @@ const handleFormatTime = (number: number) : string => {
   return `0${minutes}:${paddedN}`
 }
 
+export const startStream = (
+  mediaRecConst: Object,
+  webCamVideoRef: any,
+  mediaRecorder: any,
+  handleData: any,
+  callbacks: Array<any>,
+): void => {
+  callbacks?.length > 0 && callbacks?.map((cb: any) => cb(true))
+
+  navigator.mediaDevices.getUserMedia(mediaRecConst)
+    .then((stream) => {
+      webCamVideoRef.current.srcObject = stream
+      webCamVideoRef.current.muted = true
+
+      mediaRecorder.current = new MediaRecorder(stream)
+      mediaRecorder.current.addEventListener("dataavailable", handleData)
+      mediaRecorder.current.start()
+    })
+    .catch((err) => console.log(err))
+}
+
 export {
   setCookie,
   getCookie,

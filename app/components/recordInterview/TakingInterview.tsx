@@ -3,12 +3,15 @@ import { useEffect }        from 'react'
 import { useRef }           from 'react'
 import { useDispatch }      from 'react-redux'
 import Webcam               from 'react-webcam'
+import uuid4                from 'uuid4'
 import Background           from './Background'
 import Finished             from './Finished'
 import { handleFormatTime } from '@a/functions'
+import { startStream }      from '@a/functions'
+import { mediaRecConst }    from '@a/global'
 import { videoConst }       from '@a/global'
 import { NextQuestion     } from '@r/slicers/TakeIntervSlicer'
-import { FinishInterview  } from '@r/slicers/TakeIntervSlicer'
+import axios                from 'axios'
 
 const TakingInterv = ({
   interview,
@@ -24,18 +27,33 @@ const TakingInterv = ({
   const [nextQu, setNextQu] : any = useState(false)
   const [countS, setCountS] : any = useState(10)
   const [timerS, setTimerS] : any = useState(0)
+  const [mxTime, setMxTime] : any = useState((minutes * 60) + seconds)
+  const [mrTime, setMrTime] : any = useState(false)
+  const [formDt, setFormDt] : any = useState(new FormData())
+  const [sendDt, setSendDt] : any = useState(false)
+
+  if (sendDt) {
+    setSendDt(false)
+    axios.post('https://localhost:4043/v2/upload/video/123456789', formDt, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    })
+      .then((res)  => console.log(res))
+      .catch((err) => console.log(err))
+  }
 
   const webCamVideoRef      : any = useRef(null)
   const mediaRecorder       : any = useRef(null)
 
+  // if (document && timerS >= mxTime) document.querySelector('#pass-btn')?.click()
+
   useEffect(() => {
     let interval : any
 
-    if (countS > 0) {
+    if (countS > 0)
       interval = setInterval(() => setCountS((secs: number = 0) => secs - 1), 1000)
-    } else {
+    else {
       clearInterval(interval)
-      startStream()
+      startStream(mediaRecConst, webCamVideoRef, mediaRecorder, handleData, [])
       interval = setInterval(() => setTimerS((secs: number = 0) => secs + 1), 1000)
       setNextQu(true)
     }
@@ -43,40 +61,20 @@ const TakingInterv = ({
     return () => clearInterval(interval)
   }, [countS])
 
-  const startStream = () => {
-    navigator.mediaDevices.getUserMedia(
-      {
-        video: true,
-        audio: { echoCancellation: false },
-      }
-    )
-      .then((stream) => {
-        webCamVideoRef.current.srcObject = stream
-        webCamVideoRef.current.muted = true
-
-        mediaRecorder.current = new MediaRecorder(stream, {
-          audioBitsPerSecond: 128000,
-          videoBitsPerSecond: 2500000,
-        })
-        mediaRecorder.current.addEventListener("dataavailable", handleData)
-        mediaRecorder.current.start()
-      })
-      .catch((err) => console.log(err))
-  }
-
   const handleData = ({ data }: any) => setChunks(data)
-
   const stopStream = () => mediaRecorder.current.stop()
-
   useEffect(() => { if (chunks?.size) HandlePlayVideo() }, [chunks])
 
   const HandlePlayVideo = () => {
-    console.log('data received!')
-    // const url : any = URL.createObjectURL(chunks)
-    // const mp4 : any = document?.querySelector('#videoRecorded')
-    // mp4.src = url
-    // mp4.play()
-    // setChunks([])
+    setFormDt({
+      file: new File([chunks], `${uuid4()}.mp4`, { type: 'video/mp4' }),
+      key: 'd8b6c045c2d707256ad6822569dcd55bc26672cb',
+      tokenInt: 'f881885d4f82269ba2fe7b100db8a8af',
+      question: 'sdf',
+      questionID: 'ed6efba41cf19f34f90660eb5903178d',
+    })
+
+    setSendDt(true)
   }
 
   return (
@@ -126,18 +124,25 @@ const TakingInterv = ({
                     <span className='bg-[#EBEBEB] py-2 px-3 rounded-md'>
                       max: <b>{ minutes }{ seconds > 0 && (`:${seconds}`) }min</b>
                     </span>
-                    <span
-                      className='bg-[#007BFD] py-2 px-3 rounded-md text-white cursor-pointer'
+                    <button
+                      className={`${!mrTime ? 'visible': 'invisible'} bg-[#007BFD] py-2 px-3 rounded-md text-white cursor-pointer disabled:bg-gray-400`}
+                      onClick={() => {
+                        setMxTime(mxTime+30)
+                        setMrTime(true)
+                      }}
+                      disabled={ !nextQu }
                     >
                       +30
-                    </span>
+                    </button>
                   </div>
 
                   <div>
                     <button
-                      className='bg-[#214F71] text-white py-2 px-3 rounded-md cursor-pointer'
+                      className='bg-[#214F71] text-white py-2 px-3 rounded-md cursor-pointer disabled:bg-gray-400'
                       onClick={() => {
                         stopStream()
+                        setMrTime(false)
+                        setNextQu(false)
                         if (current < length) {
                           dispatcher(NextQuestion({ question: current }))
                           setCountS(10)
@@ -145,6 +150,7 @@ const TakingInterv = ({
                         }
                         else dispatcher(NextQuestion({ finished: true }))
                       }}
+                      id='pass-btn'
                       disabled={ !nextQu }
                     >
                       Continue
@@ -156,9 +162,7 @@ const TakingInterv = ({
           </div>
         )
           :
-        (
-          <Finished />
-        )
+        (<Finished />)
       }
     </>
   )

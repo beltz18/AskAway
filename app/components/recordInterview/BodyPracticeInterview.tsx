@@ -1,11 +1,11 @@
-import { useEffect }  from 'react'
-import { useRef }     from 'react'
-import { useState }   from 'react'
-import Link           from 'next/link'
-import Webcam         from 'react-webcam'
-import { toast }      from 'react-toastify'
-import Background     from './Background'
-import { videoConst } from '@a/global'
+import { useEffect }   from 'react'
+import { useRef }      from 'react'
+import { useState }    from 'react'
+import Link            from 'next/link'
+import Webcam          from 'react-webcam'
+import Background      from './Background'
+import { startStream } from '@a/functions'
+import { mediaRecConst, videoConst }  from '@a/global'
 import {
   Record,
   Stop,
@@ -18,42 +18,16 @@ const BodyPractice = ({ user, interview }: any) : React.JSX.Element => {
   const [chunks, setChunks] : any = useState([])
   const [record, setRecord] : any = useState(false)
   const [readyP, setReadyP] : any = useState(true)
-  const [countS, setCountS] : any = useState(30)
+  const [countS, setCountS] : any = useState(31)
 
   const webCamVideoRef : any = useRef(null)
   const mediaRecorder  : any = useRef(null)
-
-  const startStream = () => {
-    if (countS == 0) toast.error('You can only record 30 seconds as practice')
-    else {
-      setReadyP(true)
-      setRecord(true)
-
-      navigator.mediaDevices.getUserMedia(
-        {
-          video: true,
-          audio: { echoCancellation: false },
-        }
-      )
-        .then((stream) => {
-          webCamVideoRef.current.srcObject = stream
-          webCamVideoRef.current.muted = true
-
-          mediaRecorder.current = new MediaRecorder(stream, {
-            audioBitsPerSecond: 128000,
-            videoBitsPerSecond: 2500000,
-          })
-          mediaRecorder.current.addEventListener("dataavailable", handleData)
-          mediaRecorder.current.start()
-        })
-        .catch((err) => console.log(err))
-    }
-  }
 
   const handleData = ({ data }: any) => setChunks(data)
 
   const stopStream = () => {
     mediaRecorder.current.stop()
+    setCountS(31)
     setRecord(false)
     setReadyP(false)
   }
@@ -70,21 +44,14 @@ const BodyPractice = ({ user, interview }: any) : React.JSX.Element => {
   useEffect(() => {
     let interval : any
 
-    if (record && countS > 0) {
+    if (record && countS > 0)
       interval = setInterval(() => setCountS((secs: number = 0) => secs - 1), 1000)
-    } else clearInterval(interval)
+    else clearInterval(interval)
     
-    record && countS == 0 && stopStream()
-    return () => clearInterval(interval)
-      
-  }, [record, countS])
+    return () => clearInterval(interval)      
+  }, [record])
 
-  // useEffect(() => {
-  //   if (document) {
-  //     document.onkeydown     = (e) => { if (e.keyCode == 123) e.preventDefault() }
-  //     document.oncontextmenu = (e) => { if (e.button == 2)    e.preventDefault() }
-  //   }
-  // }, [])
+  countS == 0 && record && stopStream()
 
   return (
     <>
@@ -122,14 +89,14 @@ const BodyPractice = ({ user, interview }: any) : React.JSX.Element => {
             <div className='p-2 h-[25%] flex gap-6 items-center justify-center'>
               <button
                 className='bg-[#D9D9D961] w-[100px] px-3 py-2 rounded-md flex flex-col items-center justify-center'
-                onClick={ startStream }
+                onClick={() => startStream(mediaRecConst, webCamVideoRef, mediaRecorder, handleData, [setReadyP, setRecord]) }
                 disabled={ record }
               >
                 <Record color={ !record ? '#EA830A' : '#525252' } />
                 Record
               </button>
               {
-                countS < 30 && countS >= 0 && (
+                countS < 31 && countS >= 0 && (
                   <div className='flex flex-col items-center justify-between'>
                     Recording
                     <span>{ handleFormatTime(countS) }</span>
