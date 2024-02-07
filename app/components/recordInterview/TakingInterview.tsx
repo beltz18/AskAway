@@ -34,7 +34,7 @@ const TakingInterv = ({
 
   if (sendDt) {
     setSendDt(false)
-    axios.post('https://localhost:4043/v2/upload/video/123456789', formDt, {
+    axios.post('https://localhost:4043/v2/upload/video', formDt, {
       headers: { 'Content-Type': 'multipart/form-data' }
     })
       .then((res)  => console.log(res))
