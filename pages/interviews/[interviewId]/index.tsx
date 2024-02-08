@@ -14,7 +14,7 @@ const VideoInterviewTable = () : React.JSX.Element => {
         controls={ true }
         playing={ true }
         playsinline={ true }
-        url={`https://storage.googleapis.com/ask-away-production/videos/AVANZA-TECH/GERENCIA-GENERAL/ASISTENCIA-A-GERENCIA-Y-PRESIDENCIA/ANA_MARMOL__33111e/1VNUuZr16g7xWVftuZeomc.mp4`}
+        url={`https://test.askaway.io/v2/get/video/:video`}
       />
     </>
   )
