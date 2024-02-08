@@ -12,7 +12,6 @@ const VideoInterviewTable = () : React.JSX.Element => {
 
       <ReactPlayer
         controls={ true }
-        playing={ true }
         playsinline={ true }
         url={`https://test.askaway.io/v2/get/video/:video`}
       />
