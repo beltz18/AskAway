@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 
 async function loadVideoFromURL() {
   try {
-    const response : any = await fetch('https://storage.googleapis.com/ask-away-development/videos/d8b6c045c2d707256ad6822569dcd55bc26672cb/1b4111e5691b79225c1eaacc71bbe6/Hola_Hola-3__b8a8af/c4qLMXCa6PmjiVPJhXBWsU.mp4')
+    const response : any = await fetch('https://storage.googleapis.com/ask-away-development/videos/d8b6c045c2d707256ad6822569dcd55bc26672cb/6bfdd258232f391e18d6dda6aa666b06dc98a3fe/lala_lalala__54d051/rmiLMCGMJhndS89QeGh69n.mp4')
     const arrayBuffer = await response.arrayBuffer()
     const blob = new Blob([arrayBuffer], { type: 'video/mp4' })
 

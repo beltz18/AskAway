@@ -3,6 +3,7 @@ import { useRef } from 'react'
 import { useState } from 'react'
 import Link from 'next/link'
 import Webcam from 'react-webcam'
+import uuid4 from 'uuid4'
 import Background from './Background'
 import { startStream } from '@a/functions'
 import { mediaRecConst, videoConst } from '@a/global'
@@ -48,19 +49,19 @@ const BodyPractice = ({ user, interview }: any): React.JSX.Element => {
     if (isRecording) return
     if (isDone) {
       setIsDone(false)
-      const blob = new Blob(chunks.current, { type: "video/x-matroskacodecs=avc1,opus" })
+      const blob = new Blob(chunks.current, { type: "video" })
       setDownloadLink(URL.createObjectURL(blob))
       chunks.current = []
 
       const data = {
-        file: blob,
+        file:  blob,
         key: 'd8b6c045c2d707256ad6822569dcd55bc26672cb',
         tokenInt: 'f881885d4f82269ba2fe7b100db8a8af',
         question: 'sdf',
         questionID: 'ed6efba41cf19f34f90660eb5903178d',
       }
 
-      axios.post('https://localhost:4043/v2/upload/video/123456789', data, {
+      axios.post('https://localhost:4043/v2/upload/video', data, {
         headers: { 'Content-Type': 'multipart/form-data' }
       })
         .then((res)  => console.log(res))
